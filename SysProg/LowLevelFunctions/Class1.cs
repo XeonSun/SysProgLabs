@@ -9,10 +9,10 @@ using System.Globalization;
 
 namespace LowLevelFunctions
 {
-    public class Class1
+    public class LowLevelFunctions
     {
         private delegate int Operation(int a, int b);
-        static void Main()
+        static int LowLelelDiv(int a,int b)
         {
             Type[] OperationArgs = { typeof(int), typeof(int) };
             DynamicMethod div = new DynamicMethod("Div", typeof(int), OperationArgs);
@@ -22,7 +22,22 @@ namespace LowLevelFunctions
             il.Emit(OpCodes.Div);
             il.Emit(OpCodes.Ret);
             Operation div_op = (Operation) div.CreateDelegate(typeof(Operation));
-            Console.WriteLine(div_op(23, 2));
+
+            return div_op(a, b);
+        }
+
+        static int LowLelelXor(int a,int b)
+        {
+            Type[] OperationArgs = { typeof(int), typeof(int) };
+            DynamicMethod xor = new DynamicMethod("Xor", typeof(int), OperationArgs);
+            ILGenerator il = xor.GetILGenerator(256);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldarg_1);
+            il.Emit(OpCodes.Xor);
+            il.Emit(OpCodes.Ret);
+            Operation xor_op = (Operation)xor.CreateDelegate(typeof(Operation));
+
+            return xor_op(a, b);
         }
     }
 }
