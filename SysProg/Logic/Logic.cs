@@ -31,16 +31,6 @@ namespace Logic
             parameters.ReferencedAssemblies.Add("System.dll");
             try
             {
-                Console.WriteLine($@"
-                    using System;
- 
-                    public static class Checker 
-                    {{
-                        public static bool F()
-                        {{
-                            {code}
-                        }}
-                    }}");
                 var results = provider.CompileAssemblyFromSource(parameters, $@"
                     using System;
  
@@ -49,6 +39,7 @@ namespace Logic
                         public static bool F()
                         {{
                             {code}
+                            return false;
                         }}
                     }}");
                 var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
@@ -67,23 +58,110 @@ namespace Logic
             if (startStruct != -1)
             {
                 startStruct += 5;
-                while (code[startStruct] == ' ')
+                while (startStruct < code.Length && code[startStruct] == ' ')
                     startStruct++;
-                int needToFind = 1;
-                startStruct++;
-                while(startStruct < code.Length && needToFind > 0)
+                if (startStruct < code.Length)
                 {
-                    if (code[startStruct] == '(')
-                        needToFind++;
-                    else
-                    if (code[startStruct] == ')')
-                        needToFind--;
+                    int needToFind = 1;
                     startStruct++;
+                    while (startStruct < code.Length && needToFind > 0)
+                    {
+                        if (code[startStruct] == '(')
+                            needToFind++;
+                        else
+                        if (code[startStruct] == ')')
+                            needToFind--;
+                        startStruct++;
+                    }
+                    if (startStruct >= code.Length)
+                        startStruct = -1;
                 }
-                if (startStruct >= code.Length)
+                else
+                    startStruct = -1;
+            }
+            return startStruct;
+        }
+
+        public static int CheckStructVar11(string code)
+        {
+            int start = IsFitVar11(code);
+            if (start == -1)
+                return 0;
+            while (code[start] == ' ')
+                start++;
+            switch (code[start])
+            {
+                case ';':
+                    code = code.Insert(start, "count++");
+                    break;
+                case '{':
+                    code = code.Insert(start + 1, "count++;");
+                    break;
+                default:
+                    code = code.Insert(start, "{count++;");
+                    start += 9;
+                    start = code.IndexOf(';', start);
+                    if (start == -1)
+                        return 0;
+                    code = code.Insert(++start, "}");
+                    break;
+            }
+            var provider = new CSharpCodeProvider();
+            var parameters = new CompilerParameters { GenerateInMemory = true };
+            parameters.ReferencedAssemblies.Add("System.dll");
+            try
+            {
+                var results = provider.CompileAssemblyFromSource(parameters, $@"
+                    using System;
+ 
+                    public static class Checker 
+                    {{
+                        public static int F()
+                        {{
+                            int count = 0;
+                            {code}
+                            return count;
+                        }}
+                    }}");
+                var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
+                var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
+                return func();
+            }
+            catch (FileNotFoundException)
+            {
+                throw new ArgumentException("Input should be valid C# expression", nameof(code));
+            }
+        }
+
+        private static int IsFitVar11(string code)
+        {
+            int startStruct = code.IndexOf("for");
+            if (startStruct != -1)
+            {
+                startStruct += 3;
+                while (startStruct < code.Length && code[startStruct] == ' ')
+                    startStruct++;
+                if (startStruct < code.Length)
+                {
+                    int needToFind = 1;
+                    startStruct++;
+                    while (startStruct < code.Length && needToFind > 0)
+                    {
+                        if (code[startStruct] == '(')
+                            needToFind++;
+                        else
+                        if (code[startStruct] == ')')
+                            needToFind--;
+                        startStruct++;
+                    }
+                    if (startStruct >= code.Length)
+                        startStruct = -1;
+                }
+                else
                     startStruct = -1;
             }
             return startStruct;
         }
     }
+
 }
