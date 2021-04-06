@@ -51,8 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="contexts\FileContext.cs" />
+    <Compile Include="contexts\ResourceContext.cs" />
     <Compile Include="Logic.cs" />
+    <Compile Include="models\FileDLL.cs" />
+    <Compile Include="models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StructureAnalysis.cs" />
+    <Compile Include="WorkerCSV.cs" />
+    <Compile Include="WorkerDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
