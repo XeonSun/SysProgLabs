@@ -10,6 +10,6 @@ namespace Logic.contexts
             : base("DbConnection")
         { }
 
-        public DbSet<FileDLL> Files { get; set; }
+        public DbSet<File> Files { get; set; }
     }
 }

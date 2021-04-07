@@ -22,13 +22,13 @@ namespace Logic
             return false;
         }
 
-        public static bool ExportFill(string path, IEnumerable<FileDLL> files)
+        public static bool ExportFill(string path, IEnumerable<models.File> files)
         {
             try
             {
                 using (StreamWriter sw = new StreamWriter(path, false))
                 {
-                    foreach (FileDLL m in files)
+                    foreach (models.File m in files)
                         sw.WriteLine(m.Name + "," + m.Version + "," + m.Date);
                 }
                 return true;
@@ -55,17 +55,17 @@ namespace Logic
             return null;
         }
 
-        public static IEnumerable<FileDLL> ImportFile(string path)
+        public static IEnumerable<models.File> ImportFile(string path)
         {
             try
             {
-                List<FileDLL> files = new List<FileDLL>();
+                List<models.File> files = new List<models.File>();
                 using (StreamReader sr = new StreamReader(path))
                 {
                     while (!sr.EndOfStream)
                     {
                         string[] line = sr.ReadLine().Split(',');
-                        files.Add(new FileDLL(line[0], line[1], DateTime.Parse(line[2])));
+                        files.Add(new models.File(line[0], line[1], DateTime.Parse(line[2])));
                     }
                 }
                 return files;

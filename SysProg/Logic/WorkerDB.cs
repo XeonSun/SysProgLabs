@@ -20,7 +20,7 @@ namespace Logic
             return false;
         }
 
-        public static bool ImportFiles(IEnumerable<FileDLL> files)
+        public static bool ImportFiles(IEnumerable<File> files)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Logic
             return null;
         }
 
-        public static IEnumerable<FileDLL> ExportFiles()
+        public static IEnumerable<File> ExportFiles()
         {
             try
             {

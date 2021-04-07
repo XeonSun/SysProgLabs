@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-//using Logic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
