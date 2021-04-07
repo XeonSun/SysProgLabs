@@ -3,10 +3,10 @@ using System.Reflection.Emit;
 
 namespace LowLevelFunctions
 {
-    public class LowLevelFunctions
+    public static class LowLevelFunctions
     {
         private delegate int Operation(int a, int b);
-        static int LowLelelDiv(int a,int b)
+        public static int LowLelelDiv(int a,int b)
         {
             Type[] OperationArgs = { typeof(int), typeof(int) };
             DynamicMethod div = new DynamicMethod("Div", typeof(int), OperationArgs);
@@ -20,7 +20,7 @@ namespace LowLevelFunctions
             return div_op(a, b);
         }
 
-        static int LowLelelXor(int a,int b)
+        public static int LowLelelXor(int a,int b)
         {
             Type[] OperationArgs = { typeof(int), typeof(int) };
             DynamicMethod xor = new DynamicMethod("Xor", typeof(int), OperationArgs);
