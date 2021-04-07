@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Logic;
+//using Logic;
 
 namespace SysProg
 {
