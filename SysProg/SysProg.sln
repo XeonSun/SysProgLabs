@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysProg", "SysProg\SysProg.csproj", "{E8E9CD5A-03A7-4DD2-AD1A-51CE2CF289E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32BC34C8-18BD-49B3-9085-82944F7CD70F} = {32BC34C8-18BD-49B3-9085-82944F7CD70F}
+		{D75219E0-C4AC-41EF-A1A4-5878CEA0AE08} = {D75219E0-C4AC-41EF-A1A4-5878CEA0AE08}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{D75219E0-C4AC-41EF-A1A4-5878CEA0AE08}"
 EndProject

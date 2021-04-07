@@ -82,5 +82,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LowLevelFunctions\LowLevelFunctions.csproj">
+      <Project>{32bc34c8-18bd-49b3-9085-82944f7cd70f}</Project>
+      <Name>LowLevelFunctions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
