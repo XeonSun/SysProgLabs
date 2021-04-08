@@ -84,20 +84,6 @@ namespace SysProg
 
     }
     
-    
-    public abstract class Command:ICommand
-    {
-        public Command(ApplicationViewModel viewModel)
-        {
-            ViewModel = viewModel;
-        }
-
-        public ApplicationViewModel ViewModel { get; set; }
-
-        public abstract void Execute(object sender);
-    }
-
-
 
     public class CalcLowLevelDiv : Command
     {
@@ -126,17 +112,13 @@ namespace SysProg
         }
     }
 
-    public class IncCounter : ICommand
+    public class IncCounter : Command
     {
-
-        public IncCounter(ApplicationViewModel viewModel)
+        public IncCounter(ApplicationViewModel viewModel) : base(viewModel)
         {
-            ViewModel = viewModel;
         }
 
-        public ApplicationViewModel ViewModel { get; set; }
-
-        public void Execute(object sender)
+        public override void Execute(object sender)
         {
             ViewModel.Count = ViewModel.Count+1;
             Console.WriteLine(ViewModel.Text);
@@ -144,35 +126,26 @@ namespace SysProg
 
     }
 
-    public class AnalisisWhileCommand : ICommand
+    public class AnalisisWhileCommand : Command
     {
-
-        public AnalisisWhileCommand(ApplicationViewModel viewModel)
+        public AnalisisWhileCommand(ApplicationViewModel viewModel) : base(viewModel)
         {
-            ViewModel = viewModel;
         }
 
-        public ApplicationViewModel ViewModel { get; set; }
-
-
-        public void Execute(object sender)
+        public override void Execute(object sender)
         {
             ViewModel.ResultWhile = "ОК";
         }
 
     }
 
-    public class AnalisisForCommand : ICommand
+    public class AnalisisForCommand : Command
     {
-
-        public AnalisisForCommand(ApplicationViewModel viewModel)
+        public AnalisisForCommand(ApplicationViewModel viewModel) : base(viewModel)
         {
-            ViewModel = viewModel;
         }
 
-        public ApplicationViewModel ViewModel { get; set; }
-
-        public void Execute(object sender)
+        public override void Execute(object sender)
         {
             ViewModel.ResultFor = "ОК";
         }
