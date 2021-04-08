@@ -34,6 +34,8 @@ namespace SysProg
             whileResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultWhile"));
             checkWhileButton.Click+= new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisWhile, null); });
 
+            forRichTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "StructureFor"));
+
             forResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultFor"));
             checkForButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisFor, null); });
 
@@ -42,8 +44,7 @@ namespace SysProg
             divParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamB"));
             divResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divResult"));
 
-            divCountButton.Tag = applicationViewModel.CalcLowLevelDiv;
-            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(divCountButton.Tag, null); });
+            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.CalcLowLevelDiv, null); });
 
             xorParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamA"));
             xorParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamB"));
