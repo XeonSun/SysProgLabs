@@ -18,8 +18,8 @@ namespace SysProg
         {
             _applicationViewModel = new ApplicationViewModel();
 
-            label1.DataBindings.Add(new Binding("Text", applicationViewModel, "Text"));
-            button1.Tag = applicationViewModel.IncCommand;
+            label1.DataBindings.Add(new Binding("Text", _applicationViewModel, "Text"));
+            button1.Tag = _applicationViewModel.IncCommand;
             button1.Click+= new EventHandler(
                 (object sender, EventArgs e) =>
                 {
@@ -55,7 +55,7 @@ namespace SysProg
 
         private void IncCount()
         {
-            applicationViewModel.Execute(button1.Tag, null);
+            _applicationViewModel.Execute(button1.Tag, null);
         }
 
         private void Form1_Load(object sender, EventArgs e)
