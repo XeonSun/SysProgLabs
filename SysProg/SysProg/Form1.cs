@@ -16,24 +16,26 @@ namespace SysProg
 
         private void InitialControlHandlers()
         {
-            label1.Text = "Aa;fkaf;";
-
             applicationViewModel = new ApplicationViewModel();
 
             label1.DataBindings.Add(new Binding("Text", applicationViewModel, "Text"));
-
-
-
-
             button1.Tag = applicationViewModel.IncCommand;
-            
-
             button1.Click+= new EventHandler(
                 (object sender, EventArgs e) =>
                 {
                     IncCount();
                 }
                 );
+
+
+
+            whileRichTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "StructureWhile"));
+
+            whileResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultWhile"));
+            checkWhileButton.Click+= new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisWhile, null); });
+
+            forResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultFor"));
+            checkForButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisFor, null); });
 
 
             divParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamA"));
