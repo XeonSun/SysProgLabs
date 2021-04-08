@@ -18,7 +18,7 @@ namespace SysProg
         {
             label1.Text = "Aa;fkaf;";
 
-            applicationViewModel = new ApplicationViewModel();
+            _applicationViewModel = new ApplicationViewModel();
 
             divCountButton.Tag = _applicationViewModel.CalcLowLevelDiv;
             divCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(divCountButton.Tag, null); });

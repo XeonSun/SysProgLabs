@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Logic;
+using LowLevelFunctions;
 
 
 namespace SysProg
@@ -110,7 +107,7 @@ namespace SysProg
 
         public override void Execute(object sender)
         {
-            ViewModel.divResult = (int.Parse(ViewModel.divParamA) / int.Parse(ViewModel.divParamB)).ToString();
+            ViewModel.divResult = LowLevelFunctions.LowLevelFunctions.LowLelelDiv(int.Parse(ViewModel.divParamA), int.Parse(ViewModel.divParamB)).ToString();
             Console.WriteLine(ViewModel.divResult);
         }
     }
@@ -124,7 +121,7 @@ namespace SysProg
 
         public override void Execute(object sender)
         {
-            ViewModel.xorResult = (int.Parse(ViewModel.xorParamA) ^ int.Parse(ViewModel.xorParamB)).ToString();
+            ViewModel.xorResult = LowLevelFunctions.LowLevelFunctions.LowLelelXor(int.Parse(ViewModel.xorParamA), int.Parse(ViewModel.xorParamB)).ToString();
             Console.WriteLine(ViewModel.xorResult);
         }
     }
