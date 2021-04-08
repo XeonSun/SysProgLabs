@@ -16,7 +16,6 @@ namespace SysProg
 
         private void InitialControlHandlers()
         {
-
             _applicationViewModel = new ApplicationViewModel();
 
             divParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamA"));
@@ -32,6 +31,14 @@ namespace SysProg
 
             xorCountButton.Tag = _applicationViewModel.CalcLowLevelXor;
             xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.CalcLowLevelXor, null); });
+
+            whileRichTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "StructureWhile"));
+
+            whileResultLabel.DataBindings.Add(new Binding("Text", _applicationViewModel, "ResultWhile"));
+            checkWhileButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.AnalysisWhile, null); });
+
+            forResultLabel.DataBindings.Add(new Binding("Text", _applicationViewModel, "ResultFor"));
+            checkForButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.AnalysisFor, null); });
         }
 
         private void Form1_Load(object sender, EventArgs e)
