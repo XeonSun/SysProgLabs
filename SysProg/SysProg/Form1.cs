@@ -16,9 +16,12 @@ namespace SysProg
 
         private void InitialControlHandlers()
         {
-            label1.Text = "Aa;fkaf;";
 
             _applicationViewModel = new ApplicationViewModel();
+
+            divParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamA"));
+            divParamBTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamB"));
+            divResultTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divResult"));
 
             divCountButton.Tag = _applicationViewModel.CalcLowLevelDiv;
             divCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(divCountButton.Tag, null); });
