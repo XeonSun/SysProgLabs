@@ -157,7 +157,7 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            ViewModel.ResultWhile = "ОК";
+            ViewModel.ResultWhile = StructureAnalysis.CheckStructVar7(ViewModel.StructureWhile).ToString();
         }
 
     }
@@ -174,9 +174,8 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            ViewModel.ResultFor = "ОК";
+            ViewModel.ResultFor = StructureAnalysis.CheckStructVar11(ViewModel.StructureFor).ToString();
         }
-
     }
 
 }

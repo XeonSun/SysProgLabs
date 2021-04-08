@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Logic
 {
-    static class StructureAnalysis
+    public static class StructureAnalysis
     {
 
         public static bool CheckStructVar7(string code)
