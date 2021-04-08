@@ -34,6 +34,19 @@ namespace SysProg
                     IncCount();
                 }
                 );
+
+
+            divParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamA"));
+            divParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamB"));
+            divResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divResult"));
+
+            divCountButton.Tag = applicationViewModel.CalcLowLevelDiv;
+            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(divCountButton.Tag, null); });
+
+            xorParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamA"));
+            xorParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamB"));
+            xorResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorResult"));
+            xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.CalcLowLevelXor, null); });
         }
 
 
