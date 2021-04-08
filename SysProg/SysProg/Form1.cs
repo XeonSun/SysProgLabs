@@ -7,52 +7,30 @@ namespace SysProg
 {
     public partial class Form1 : Form
     {
-        private ApplicationViewModel applicationViewModel;
+        private ApplicationViewModel _applicationViewModel;
         public Form1()
         {
             InitializeComponent();
-            this.InitialControlHandlers();
+            InitialControlHandlers();
         }
 
         private void InitialControlHandlers()
         {
-            label1.Text = "Aa;fkaf;";
+            _applicationViewModel = new ApplicationViewModel();
 
-            applicationViewModel = new ApplicationViewModel();
+            divParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamA"));
+            divParamBTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamB"));
+            divResultTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divResult"));
 
-            label1.DataBindings.Add(new Binding("Text", applicationViewModel, "Text"));
+            divCountButton.Tag = _applicationViewModel.CalcLowLevelDiv;
+            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(divCountButton.Tag, null); });
 
+            xorParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorParamA"));
+            xorParamBTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorParamB"));
+            xorResultTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorResult"));
 
-
-
-            button1.Tag = applicationViewModel.IncCommand;
-            
-
-            button1.Click+= new EventHandler(
-                (object sender, EventArgs e) =>
-                {
-                    IncCount();
-                }
-                );
-
-
-            divParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamA"));
-            divParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamB"));
-            divResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divResult"));
-
-            divCountButton.Tag = applicationViewModel.CalcLowLevelDiv;
-            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(divCountButton.Tag, null); });
-
-            xorParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamA"));
-            xorParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamB"));
-            xorResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorResult"));
-            xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.CalcLowLevelXor, null); });
-        }
-
-
-        private void IncCount()
-        {
-            applicationViewModel.Execute(button1.Tag, null);
+            xorCountButton.Tag = _applicationViewModel.CalcLowLevelXor;
+            xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.CalcLowLevelXor, null); });
         }
 
         private void Form1_Load(object sender, EventArgs e)
