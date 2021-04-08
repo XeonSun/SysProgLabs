@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Logic
 {
-    static class StructureAnalysis
+    public static class StructureAnalysis
     {
 
         public static bool CheckStructVar7(string code)
@@ -13,26 +13,28 @@ namespace Logic
             int start = IsFitVar7(code);
             if (start == -1)
                 return false;
-            while (code[start] == ' ')
+            while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
                 start++;
-            switch (code[start])
+            if (start < code.Length)
             {
-                case ';':
-                    code = code.Insert(start, "return true");
-                    break;
-                case '{':
-                    code = code.Insert(start + 1, "return true;");
-                    break;
-                default:
-                    code = code.Insert(start, "return true;");
-                    break;
-            }
-            var provider = new CSharpCodeProvider();
-            var parameters = new CompilerParameters { GenerateInMemory = true };
-            parameters.ReferencedAssemblies.Add("System.dll");
-            try
-            {
-                var results = provider.CompileAssemblyFromSource(parameters, $@"
+                switch (code[start])
+                {
+                    case ';':
+                        code = code.Insert(start, "return true");
+                        break;
+                    case '{':
+                        code = code.Insert(start + 1, "return true;");
+                        break;
+                    default:
+                        code = code.Insert(start, "return true;");
+                        break;
+                }
+                var provider = new CSharpCodeProvider();
+                var parameters = new CompilerParameters { GenerateInMemory = true };
+                parameters.ReferencedAssemblies.Add("System.dll");
+                try
+                {
+                    var results = provider.CompileAssemblyFromSource(parameters, $@"
                     using System;
  
                     public static class Checker 
@@ -43,14 +45,16 @@ namespace Logic
                             return false;
                         }}
                     }}");
-                var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
-                var func = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), null, method);
-                return func();
+                    var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
+                    var func = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), null, method);
+                    return func();
+                }
+                catch (FileNotFoundException)
+                {
+                    throw new ArgumentException("Input should be valid C# expression", nameof(code));
+                }
             }
-            catch (FileNotFoundException)
-            {
-                throw new ArgumentException("Input should be valid C# expression", nameof(code));
-            }
+            return false;
         }
 
         private static int IsFitVar7(string code)
@@ -59,9 +63,9 @@ namespace Logic
             if (startStruct != -1)
             {
                 startStruct += 5;
-                while (startStruct < code.Length && code[startStruct] == ' ')
+                while (startStruct < code.Length && (code[startStruct] == ' ' || code[startStruct] == '\n'))
                     startStruct++;
-                if (startStruct < code.Length)
+                if (startStruct < code.Length && code[startStruct] == '(')
                 {
                     int needToFind = 1;
                     startStruct++;
@@ -88,31 +92,33 @@ namespace Logic
             int start = IsFitVar11(code);
             if (start == -1)
                 return 0;
-            while (code[start] == ' ')
+            while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
                 start++;
-            switch (code[start])
+            if (start < code.Length)
             {
-                case ';':
-                    code = code.Insert(start, "count++");
-                    break;
-                case '{':
-                    code = code.Insert(start + 1, "count++;");
-                    break;
-                default:
-                    code = code.Insert(start, "{count++;");
-                    start += 9;
-                    start = code.IndexOf(';', start);
-                    if (start == -1)
-                        return 0;
-                    code = code.Insert(++start, "}");
-                    break;
-            }
-            var provider = new CSharpCodeProvider();
-            var parameters = new CompilerParameters { GenerateInMemory = true };
-            parameters.ReferencedAssemblies.Add("System.dll");
-            try
-            {
-                var results = provider.CompileAssemblyFromSource(parameters, $@"
+                switch (code[start])
+                {
+                    case ';':
+                        code = code.Insert(start, "count++");
+                        break;
+                    case '{':
+                        code = code.Insert(start + 1, "count++;");
+                        break;
+                    default:
+                        code = code.Insert(start, "{count++;");
+                        start += 9;
+                        start = code.IndexOf(';', start);
+                        if (start == -1)
+                            return 0;
+                        code = code.Insert(++start, "}");
+                        break;
+                }
+                var provider = new CSharpCodeProvider();
+                var parameters = new CompilerParameters { GenerateInMemory = true };
+                parameters.ReferencedAssemblies.Add("System.dll");
+                try
+                {
+                    var results = provider.CompileAssemblyFromSource(parameters, $@"
                     using System;
  
                     public static class Checker 
@@ -124,14 +130,16 @@ namespace Logic
                             return count;
                         }}
                     }}");
-                var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
-                var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
-                return func();
+                    var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
+                    var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
+                    return func();
+                }
+                catch (FileNotFoundException)
+                {
+                    throw new ArgumentException("Input should be valid C# expression", nameof(code));
+                }
             }
-            catch (FileNotFoundException)
-            {
-                throw new ArgumentException("Input should be valid C# expression", nameof(code));
-            }
+            return 0;
         }
 
         private static int IsFitVar11(string code)
@@ -140,9 +148,9 @@ namespace Logic
             if (startStruct != -1)
             {
                 startStruct += 3;
-                while (startStruct < code.Length && code[startStruct] == ' ')
+                while (startStruct < code.Length && (code[startStruct] == ' ' || code[startStruct] == '\n'))
                     startStruct++;
-                if (startStruct < code.Length)
+                if (startStruct < code.Length && code[startStruct] == '(')
                 {
                     int needToFind = 1;
                     startStruct++;
