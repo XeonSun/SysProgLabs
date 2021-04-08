@@ -7,16 +7,16 @@ namespace SysProg
 {
     public partial class Form1 : Form
     {
-        private ApplicationViewModel applicationViewModel;
+        private ApplicationViewModel _applicationViewModel;
         public Form1()
         {
             InitializeComponent();
-            this.InitialControlHandlers();
+            InitialControlHandlers();
         }
 
         private void InitialControlHandlers()
         {
-            applicationViewModel = new ApplicationViewModel();
+            _applicationViewModel = new ApplicationViewModel();
 
             label1.DataBindings.Add(new Binding("Text", applicationViewModel, "Text"));
             button1.Tag = applicationViewModel.IncCommand;
@@ -29,27 +29,27 @@ namespace SysProg
 
 
 
-            whileRichTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "StructureWhile"));
+            whileRichTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "StructureWhile"));
 
-            whileResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultWhile"));
-            checkWhileButton.Click+= new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisWhile, null); });
+            whileResultLabel.DataBindings.Add(new Binding("Text", _applicationViewModel, "ResultWhile"));
+            checkWhileButton.Click+= new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.AnalysisWhile, null); });
 
-            forRichTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "StructureFor"));
+            forRichTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "StructureFor"));
 
-            forResultLabel.DataBindings.Add(new Binding("Text", applicationViewModel, "ResultFor"));
-            checkForButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.AnalysisFor, null); });
+            forResultLabel.DataBindings.Add(new Binding("Text", _applicationViewModel, "ResultFor"));
+            checkForButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.AnalysisFor, null); });
 
 
-            divParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamA"));
-            divParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divParamB"));
-            divResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "divResult"));
+            divParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamA"));
+            divParamBTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divParamB"));
+            divResultTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "divResult"));
 
-            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.CalcLowLevelDiv, null); });
+            divCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.CalcLowLevelDiv, null); });
 
-            xorParamATextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamA"));
-            xorParamBTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorParamB"));
-            xorResultTextBox.DataBindings.Add(new Binding("Text", applicationViewModel, "xorResult"));
-            xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { applicationViewModel.Execute(applicationViewModel.CalcLowLevelXor, null); });
+            xorParamATextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorParamA"));
+            xorParamBTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorParamB"));
+            xorResultTextBox.DataBindings.Add(new Binding("Text", _applicationViewModel, "xorResult"));
+            xorCountButton.Click += new EventHandler((object sender, EventArgs e) => { _applicationViewModel.Execute(_applicationViewModel.CalcLowLevelXor, null); });
         }
 
 
