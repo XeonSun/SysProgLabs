@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Logic;
 using LowLevelFunctions;
 
@@ -157,7 +158,14 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            ViewModel.ResultWhile = StructureAnalysis.CheckStructVar7(ViewModel.StructureWhile).ToString();
+            try
+            {
+                Task.Factory.StartNew(() => ViewModel.ResultWhile = StructureAnalysis.CheckStructVar7(ViewModel.StructureWhile).ToString());
+            }
+            catch (Exception)
+            {
+                ViewModel.ResultWhile = "Неверно введенное выражение";
+            }
         }
 
     }
@@ -174,7 +182,14 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            ViewModel.ResultFor = StructureAnalysis.CheckStructVar11(ViewModel.StructureFor).ToString();
+            try
+            {
+                Task.Factory.StartNew(() => ViewModel.ResultFor = StructureAnalysis.CheckStructVar11(ViewModel.StructureFor).ToString());
+            }
+            catch(Exception)
+            {
+                ViewModel.ResultFor = "Неверно введенное выражение";
+            }
         }
     }
 
