@@ -14,10 +14,16 @@ namespace SysProg
         private int _count = 0;
         public int Count { get { return _count; } set { _count = value; Text = _count.ToString();PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text")); } }
         public string Text { get; set; }
+
+        //WHILE
         public string StructureWhile { get; set; }
+        private string _resultWhile;
+        public string ResultWhile { get { return _resultWhile; } set { _resultWhile = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ResultWhile")); } }
+
+        //FOR
         public string StructureFor { get; set; }
-        public string ResultWhile { get; set; }
-        public string ResultFor { get; set; }
+        private string _resultFor;
+        public string ResultFor { get { return _resultFor; } set { _resultFor = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ResultFor")); } }
 
         //DIV
         public string divParamA { get; set; }
@@ -35,10 +41,7 @@ namespace SysProg
         public string xorResult { get { return _xorResult; } set { _xorResult = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("xorResult")); } }
 
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
-
 
 
         private ICommand _incCommand;
@@ -58,14 +61,14 @@ namespace SysProg
 
 
         private ICommand _analysisWhile;
-        public ICommand AnalisisWhile
+        public ICommand AnalysisWhile
         {
             get { return _analysisWhile ?? (_analysisWhile = new AnalisisWhileCommand(this)); }
         }
 
 
         private ICommand _analysisFor;
-        public ICommand AnalisisFor
+        public ICommand AnalysisFor
         {
             get { return _analysisFor ?? (_analysisFor = new AnalisisForCommand(this)); }
         }
@@ -126,7 +129,6 @@ namespace SysProg
         }
     }
 
-
     public class IncCounter : ICommand
     {
 
@@ -158,7 +160,7 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            //TODO
+            ViewModel.ResultWhile = "ОК";
         }
 
     }
@@ -175,7 +177,7 @@ namespace SysProg
 
         public void Execute(object sender)
         {
-            //TODO
+            ViewModel.ResultFor = "ОК";
         }
 
     }
