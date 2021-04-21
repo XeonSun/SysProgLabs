@@ -9,31 +9,84 @@ namespace SysProg.presenter
     public class MainPresenter : IPresenter
     {
         private IMainView _view;
+        private IFillView<File> _fileView;
+        private IFillView<Resource> _resourceView;
         private Controller _controller;
         private FileRepository _fileRepository;
         private ResourceContext _resourceContext;
 
-        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResourceContext resourceContext)
+        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResourceContext resourceContext, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
             _view = view;
             _controller = controller;
             _fileRepository = fileRepository;
             _resourceContext = resourceContext;
+            _fileView = fileView;
+            _resourceView = resourceView;
 
             _view.WhileAnalysis += WhileAnalysis;
             _view.ForAnalysis += ForAnalysis;
             _view.DivCalculation += DivCalculate;
             _view.XorCalculation += XorCalculate;
             _view.AddFile += AddFile;
+            _view.UpdateFile += UpdateFile;
+            _view.DeleteFile += DeleteFile;
 
             _view.UpdateFiles(_fileRepository.Data);
         }
 
         private void AddFile()
         {
-            _fileRepository.Add(new File("Steam.exe", "v1.0.1", DateTime.Now));
+            _fileView.Show();
+            _fileView.Submit += AddFileToRep;
+        }
+
+        private void AddFileToRep()
+        {
+            File file = new File();
+            _fileView.GetData(file);
+            _fileRepository.Add(file);
+            _fileView.Close();
+            _fileView = new FileInputForm();
             _view.UpdateFiles(_fileRepository.Data);
         }
+
+        private void UpdateFile()
+        {
+            int index = 0;
+            _view.GetFileIndex(ref index);
+            if (index != -1 && index < _fileRepository.Data.Count)
+            {
+                Console.WriteLine(index);
+                _fileView.Show();
+                _fileView.Submit += UpdateFileInRep;
+                _fileView.SetData(_fileRepository.Data[index]);
+            }
+        }
+
+        private void UpdateFileInRep()
+        {
+            File file = new File();
+            _fileView.GetData(file);
+            int index = 0;
+            _view.GetFileIndex(ref index);
+            _fileRepository.Edit(index, file);
+            _fileView.Close();
+            _fileView = new FileInputForm();
+            _view.UpdateFiles(_fileRepository.Data);
+        }
+
+        private void DeleteFile()
+        {
+            int index = 0;
+            _view.GetFileIndex(ref index);
+            if (index != -1)
+            {
+                _fileRepository.Delete(index);
+                _view.UpdateFiles(_fileRepository.Data);
+            }
+        }
+
 
         private void WhileAnalysis()
         {

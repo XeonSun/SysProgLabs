@@ -1,6 +1,7 @@
 ﻿using LightInject;
 using Logic.contexts;
 using Logic.Model;
+using Logic.models;
 using SysProg.presenter;
 using SysProg.views;
 using System;
@@ -28,6 +29,8 @@ namespace SysProg
             container.RegisterInstance(fileRepository);
             container.RegisterInstance(resourceContext);
             container.Register<IMainView, MainForm>();
+            container.Register<IFillView<File>, FileInputForm>();
+            container.Register<IFillView<Resource>, ResourceInputForm>();
             container.Register<MainPresenter>();
 
             Controller controller = new Controller(container);

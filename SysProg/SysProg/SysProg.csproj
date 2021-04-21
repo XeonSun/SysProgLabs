@@ -68,6 +68,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="ResourceInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceInputForm.Designer.cs">
+      <DependentUpon>ResourceInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileInputForm.Designer.cs">
+      <DependentUpon>FileInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,10 +88,17 @@
     </Compile>
     <Compile Include="presenter\IPresenter.cs" />
     <Compile Include="presenter\MainPresenter.cs" />
+    <Compile Include="views\IFillView.cs" />
     <Compile Include="views\IMainView.cs" />
     <Compile Include="views\IView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ResourceInputForm.resx">
+      <DependentUpon>ResourceInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileInputForm.resx">
+      <DependentUpon>FileInputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

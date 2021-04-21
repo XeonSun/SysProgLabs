@@ -8,6 +8,7 @@ namespace SysProg
 {
     public interface IView
     {
+        void Close();
         void Show();
     }
 }

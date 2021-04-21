@@ -15,7 +15,7 @@ namespace SysProg
             _context = context;
             InitializeComponent();
 
-            checkWhileButton.Click += (sender, args) =>  Invoke(WhileAnalysis);
+            checkWhileButton.Click += (sender, args) => Invoke(WhileAnalysis);
             checkForButton.Click += (sender, args) => Invoke(ForAnalysis);
             divCountButton.Click += (sender, args) => Invoke(DivCalculation);
             xorCountButton.Click += (sender, args) => Invoke(XorCalculation);
@@ -62,7 +62,13 @@ namespace SysProg
 
         public void GetFileIndex(ref int index)
         {
-            index = fDataGridView.Rows.IndexOf(fDataGridView.SelectedRows[0]);
+            var selected = fDataGridView.SelectedRows;
+            if (selected.Count > 0)
+            {
+                index = fDataGridView.Rows.IndexOf(selected[0]);
+            }
+            else
+                index = -1;
         }
 
         public void GetWhileStruct(ref string structure)
