@@ -81,6 +81,7 @@ namespace SysProg
             this.ResourceMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResourceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.richTextBoxLogs = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -94,7 +95,7 @@ namespace SysProg
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 0;
@@ -124,19 +125,19 @@ namespace SysProg
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // выйтиToolStripMenuItem
             // 
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.выйтиToolStripMenuItem.Text = "Выйти";
             // 
             // инфоToolStripMenuItem
@@ -570,11 +571,20 @@ namespace SysProg
             this.tabControl1.Size = new System.Drawing.Size(775, 398);
             this.tabControl1.TabIndex = 2;
             // 
+            // richTextBoxLogs
+            // 
+            this.richTextBoxLogs.Location = new System.Drawing.Point(17, 432);
+            this.richTextBoxLogs.Name = "richTextBoxLogs";
+            this.richTextBoxLogs.Size = new System.Drawing.Size(767, 96);
+            this.richTextBoxLogs.TabIndex = 3;
+            this.richTextBoxLogs.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 562);
+            this.Controls.Add(this.richTextBoxLogs);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -653,6 +663,7 @@ namespace SysProg
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceDate;
+        private System.Windows.Forms.RichTextBox richTextBoxLogs;
     }
 }
 
