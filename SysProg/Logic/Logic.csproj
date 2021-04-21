@@ -55,6 +55,8 @@
     <Compile Include="contexts\ResourceContext.cs" />
     <Compile Include="models\File.cs" />
     <Compile Include="models\Resource.cs" />
+    <Compile Include="Model\FileRepository.cs" />
+    <Compile Include="Model\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\StructureAnalysis.cs" />
     <Compile Include="Model\WorkerCSV.cs" />

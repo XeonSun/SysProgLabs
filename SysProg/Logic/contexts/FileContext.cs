@@ -4,10 +4,10 @@ using System.Data.Entity;
 
 namespace Logic.contexts
 {
-    class FileContext : DbContext
+    public class FileContext : DbContext
     {
         public FileContext()
-            : base("DbConnection")
+            : base("DBConnection")
         { }
 
         public DbSet<File> Files { get; set; }

@@ -1,6 +1,7 @@
 ﻿using SysProg.views;
+using Logic.contexts;
 using Logic.Model;
-using LowLevelFunctions;
+using Logic.models;
 using System;
 
 namespace SysProg.presenter
@@ -9,16 +10,29 @@ namespace SysProg.presenter
     {
         private IMainView _view;
         private Controller _controller;
+        private FileRepository _fileRepository;
+        private ResourceContext _resourceContext;
 
-        public MainPresenter(IMainView view, Controller controller)
+        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResourceContext resourceContext)
         {
             _view = view;
             _controller = controller;
+            _fileRepository = fileRepository;
+            _resourceContext = resourceContext;
 
             _view.WhileAnalysis += WhileAnalysis;
             _view.ForAnalysis += ForAnalysis;
             _view.DivCalculation += DivCalculate;
             _view.XorCalculation += XorCalculate;
+            _view.AddFile += AddFile;
+
+            _view.UpdateFiles(_fileRepository.Data);
+        }
+
+        private void AddFile()
+        {
+            _fileRepository.Add(new File("Steam.exe", "v1.0.1", DateTime.Now));
+            _view.UpdateFiles(_fileRepository.Data);
         }
 
         private void WhileAnalysis()

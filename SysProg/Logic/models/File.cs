@@ -7,6 +7,7 @@ namespace Logic.models
         private string _name, _version;
         private DateTime _date;
 
+        public int Id { get; set; }
         public string Name { get { return _name; } set { _name = value; } }
         public string Version { get { return _version; } set { _version = value; } }
         public DateTime Date { get { return _date; } set { _date = value; } }

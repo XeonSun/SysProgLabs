@@ -67,6 +67,9 @@ namespace SysProg
             this.importFButton = new System.Windows.Forms.Button();
             this.exportFButton = new System.Windows.Forms.Button();
             this.fDataGridView = new System.Windows.Forms.DataGridView();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.deleteRButton = new System.Windows.Forms.Button();
             this.addRButton = new System.Windows.Forms.Button();
@@ -74,6 +77,9 @@ namespace SysProg
             this.importRButton = new System.Windows.Forms.Button();
             this.exportRButton = new System.Windows.Forms.Button();
             this.rDataGridView = new System.Windows.Forms.DataGridView();
+            this.ResourceAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ResourceMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ResourceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -88,7 +94,7 @@ namespace SysProg
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 422);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
             this.statusStrip1.TabIndex = 0;
@@ -429,11 +435,35 @@ namespace SysProg
             // fDataGridView
             // 
             this.fDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.fDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileName,
+            this.FileVersion,
+            this.FileDate});
             this.fDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
             this.fDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.fDataGridView.MultiSelect = false;
             this.fDataGridView.Name = "fDataGridView";
+            this.fDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.fDataGridView.Size = new System.Drawing.Size(761, 334);
             this.fDataGridView.TabIndex = 6;
+            // 
+            // FileName
+            // 
+            this.FileName.HeaderText = "Название файла";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            // 
+            // FileVersion
+            // 
+            this.FileVersion.HeaderText = "Версия файла";
+            this.FileVersion.Name = "FileVersion";
+            this.FileVersion.ReadOnly = true;
+            // 
+            // FileDate
+            // 
+            this.FileDate.HeaderText = "Дата редактирования";
+            this.FileDate.Name = "FileDate";
+            this.FileDate.ReadOnly = true;
             // 
             // tabPage1
             // 
@@ -499,11 +529,33 @@ namespace SysProg
             // rDataGridView
             // 
             this.rDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ResourceAddress,
+            this.ResourceMode,
+            this.ResourceDate});
             this.rDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
             this.rDataGridView.Location = new System.Drawing.Point(3, 3);
             this.rDataGridView.Name = "rDataGridView";
             this.rDataGridView.Size = new System.Drawing.Size(761, 334);
             this.rDataGridView.TabIndex = 0;
+            // 
+            // ResourceAddress
+            // 
+            this.ResourceAddress.HeaderText = "Адрес ресурса";
+            this.ResourceAddress.Name = "ResourceAddress";
+            this.ResourceAddress.ReadOnly = true;
+            // 
+            // ResourceMode
+            // 
+            this.ResourceMode.HeaderText = "Режим доступа";
+            this.ResourceMode.Name = "ResourceMode";
+            this.ResourceMode.ReadOnly = true;
+            // 
+            // ResourceDate
+            // 
+            this.ResourceDate.HeaderText = "Дата доступа";
+            this.ResourceDate.Name = "ResourceDate";
+            this.ResourceDate.ReadOnly = true;
             // 
             // tabControl1
             // 
@@ -522,7 +574,7 @@ namespace SysProg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 444);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -595,6 +647,12 @@ namespace SysProg
         private System.Windows.Forms.Button exportRButton;
         private System.Windows.Forms.DataGridView rDataGridView;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileVersion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ResourceAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ResourceMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ResourceDate;
     }
 }
 

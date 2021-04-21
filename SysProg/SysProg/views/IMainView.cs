@@ -6,11 +6,19 @@ namespace SysProg.views
 {
     public interface IMainView : IView
     {
-        //void LoadFiles(IList<File> files);
-        //void UpdateFiles(IList<File> files);
+        void LoadFiles(IList<File> files);
+        void UpdateFiles(IList<File> files);
+        void GetFileIndex(ref int index);
+        event Action AddFile;
+        event Action UpdateFile;
+        event Action DeleteFile;
 
         //void LoadRecources(IList<File> recources);
         //void UpdateRecources(IList<File> recources);
+        //void GetRecourceIndex(ref int index);
+        //event Action AddRecource;
+        //event Action UpdateRecource;
+        //event Action DeleteRecource;
 
         void GetWhileStruct(ref string structure);
         void SetWhileResult(string result);
