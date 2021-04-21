@@ -2,7 +2,7 @@
 
 namespace Logic.models
 {
-    class Resource
+    public class Resource
     {
         private string _address, _type;
         private DateTime _date;

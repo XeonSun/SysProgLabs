@@ -2,7 +2,7 @@
 using Logic.models;
 using System.Collections.Generic;
 
-namespace Logic
+namespace Logic.Model
 {
     static class WorkerDB
     {

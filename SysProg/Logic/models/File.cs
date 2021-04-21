@@ -2,7 +2,7 @@
 
 namespace Logic.models
 {
-    class File
+    public class File
     {
         private string _name, _version;
         private DateTime _date;

@@ -1,16 +1,15 @@
 ﻿using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
-using System.IO;
 
-namespace Logic
+namespace Logic.Model
 {
     public static class StructureAnalysis
     {
 
-        public static bool CheckStructVar7(string code)
+        public static bool CheckStructWhile(string code)
         {
-            int start = IsFitVar7(code);
+            int start = IsFitWhile(code);
             if (start == -1)
                 return false;
             while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
@@ -32,9 +31,7 @@ namespace Logic
                 var provider = new CSharpCodeProvider();
                 var parameters = new CompilerParameters { GenerateInMemory = true };
                 parameters.ReferencedAssemblies.Add("System.dll");
-                try
-                {
-                    var results = provider.CompileAssemblyFromSource(parameters, $@"
+                var results = provider.CompileAssemblyFromSource(parameters, $@"
                     using System;
  
                     public static class Checker 
@@ -45,19 +42,14 @@ namespace Logic
                             return false;
                         }}
                     }}");
-                    var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
-                    var func = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), null, method);
-                    return func();
-                }
-                catch (FileNotFoundException)
-                {
-                    throw new ArgumentException("Input should be valid C# expression", nameof(code));
-                }
+                var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
+                var func = (Func<bool>)Delegate.CreateDelegate(typeof(Func<bool>), null, method);
+                return func();
             }
-            return false;
+            throw new ArgumentException("Не правильная конструкция while");
         }
 
-        private static int IsFitVar7(string code)
+        private static int IsFitWhile(string code)
         {
             int startStruct = code.IndexOf("while");
             if (startStruct != -1)
@@ -87,9 +79,9 @@ namespace Logic
             return startStruct;
         }
 
-        public static int CheckStructVar11(string code)
+        public static int CheckStructFor(string code)
         {
-            int start = IsFitVar11(code);
+            int start = IsFitFor(code);
             if (start == -1)
                 return 0;
             while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
@@ -116,9 +108,7 @@ namespace Logic
                 var provider = new CSharpCodeProvider();
                 var parameters = new CompilerParameters { GenerateInMemory = true };
                 parameters.ReferencedAssemblies.Add("System.dll");
-                try
-                {
-                    var results = provider.CompileAssemblyFromSource(parameters, $@"
+                var results = provider.CompileAssemblyFromSource(parameters, $@"
                     using System;
  
                     public static class Checker 
@@ -130,19 +120,14 @@ namespace Logic
                             return count;
                         }}
                     }}");
-                    var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
-                    var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
-                    return func();
-                }
-                catch (FileNotFoundException)
-                {
-                    throw new ArgumentException("Input should be valid C# expression", nameof(code));
-                }
+                var method = results.CompiledAssembly.GetType("Checker").GetMethod("F");
+                var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
+                return func();
             }
-            return 0;
+            throw new ArgumentException("Не правильная конструкция while");
         }
 
-        private static int IsFitVar11(string code)
+        private static int IsFitFor(string code)
         {
             int startStruct = code.IndexOf("for");
             if (startStruct != -1)

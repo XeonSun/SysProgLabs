@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SysProg
 {
-    public interface ICommand
+    public interface IPresenter
     {
-        void Execute(object sender);
+        void Run();
     }
 }

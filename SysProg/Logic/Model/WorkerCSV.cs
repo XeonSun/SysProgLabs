@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Logic
+namespace Logic.Model
 {
     static class WorkerCSV
     {   
