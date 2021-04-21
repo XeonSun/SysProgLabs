@@ -11,7 +11,7 @@ namespace Logic.Model
         {
             int start = IsFitWhile(code);
             if (start == -1)
-                return false;
+                throw new ArgumentException("Не правильная конструкция while");
             while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
                 start++;
             if (start < code.Length)
@@ -83,7 +83,7 @@ namespace Logic.Model
         {
             int start = IsFitFor(code);
             if (start == -1)
-                return 0;
+                throw new ArgumentException("Не правильная конструкция for");
             while (start < code.Length && (code[start] == ' ' || code[start] == '\n'))
                 start++;
             if (start < code.Length)
@@ -91,14 +91,16 @@ namespace Logic.Model
                 switch (code[start])
                 {
                     case ';':
-                        code = code.Insert(start, "count++");
+                        code = code.Remove(start, 1);
+                        code = code.Insert(start, $@"{{count++; if(count == {int.MaxValue}) return count;}}");
                         break;
                     case '{':
-                        code = code.Insert(start + 1, "count++;");
+                        code = code.Insert(start + 1, $@"count++; if(count == {int.MaxValue}) return count;");
                         break;
                     default:
-                        code = code.Insert(start, "{count++;");
-                        start += 9;
+                        string inserting = $@"{{count++; if(count == {int.MaxValue}) return count;";
+                        code = code.Insert(start, inserting);
+                        start += inserting.Length;
                         start = code.IndexOf(';', start);
                         if (start == -1)
                             return 0;
@@ -124,7 +126,7 @@ namespace Logic.Model
                 var func = (Func<int>)Delegate.CreateDelegate(typeof(Func<int>), null, method);
                 return func();
             }
-            throw new ArgumentException("Не правильная конструкция while");
+            throw new ArgumentException("Не правильная конструкция for");
         }
 
         private static int IsFitFor(string code)

@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="contexts\FileContext.cs" />
     <Compile Include="contexts\ResourceContext.cs" />
-    <Compile Include="Model\Logic.cs" />
     <Compile Include="models\File.cs" />
     <Compile Include="models\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -38,42 +38,42 @@ namespace SysProg
             this.инфоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.divParamATextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.divParamBTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.divResultTextBox = new System.Windows.Forms.TextBox();
-            this.divCountButton = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.xorParamATextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.xorParamBTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.xorResultTextBox = new System.Windows.Forms.TextBox();
             this.xorCountButton = new System.Windows.Forms.Button();
+            this.xorResultTextBox = new System.Windows.Forms.TextBox();
+            this.xorParamBTextBox = new System.Windows.Forms.TextBox();
+            this.xorParamATextBox = new System.Windows.Forms.TextBox();
+            this.divResultTextBox = new System.Windows.Forms.TextBox();
+            this.divParamBTextBox = new System.Windows.Forms.TextBox();
+            this.divParamATextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.divCountButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.forRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.checkForButton = new System.Windows.Forms.Button();
             this.forResultLabel = new System.Windows.Forms.Label();
+            this.checkForButton = new System.Windows.Forms.Button();
+            this.forRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.whileRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.checkWhileButton = new System.Windows.Forms.Button();
             this.whileResultLabel = new System.Windows.Forms.Label();
+            this.checkWhileButton = new System.Windows.Forms.Button();
+            this.whileRichTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fDataGridView = new System.Windows.Forms.DataGridView();
-            this.exportFButton = new System.Windows.Forms.Button();
-            this.importFButton = new System.Windows.Forms.Button();
-            this.editFButton = new System.Windows.Forms.Button();
-            this.addFButton = new System.Windows.Forms.Button();
             this.deleteFButton = new System.Windows.Forms.Button();
+            this.addFButton = new System.Windows.Forms.Button();
+            this.editFButton = new System.Windows.Forms.Button();
+            this.importFButton = new System.Windows.Forms.Button();
+            this.exportFButton = new System.Windows.Forms.Button();
+            this.fDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.rDataGridView = new System.Windows.Forms.DataGridView();
-            this.exportRButton = new System.Windows.Forms.Button();
-            this.importRButton = new System.Windows.Forms.Button();
-            this.editRButton = new System.Windows.Forms.Button();
-            this.addRButton = new System.Windows.Forms.Button();
             this.deleteRButton = new System.Windows.Forms.Button();
+            this.addRButton = new System.Windows.Forms.Button();
+            this.editRButton = new System.Windows.Forms.Button();
+            this.importRButton = new System.Windows.Forms.Button();
+            this.exportRButton = new System.Windows.Forms.Button();
+            this.rDataGridView = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -171,46 +171,36 @@ namespace SysProg
             this.tabPage5.Text = "Низкоуровневые операции";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // xorCountButton
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Операция деления";
+            this.xorCountButton.Location = new System.Drawing.Point(6, 113);
+            this.xorCountButton.Name = "xorCountButton";
+            this.xorCountButton.Size = new System.Drawing.Size(75, 23);
+            this.xorCountButton.TabIndex = 13;
+            this.xorCountButton.Text = "Посчитать";
+            this.xorCountButton.UseVisualStyleBackColor = true;
             // 
-            // divParamATextBox
+            // xorResultTextBox
             // 
-            this.divParamATextBox.Location = new System.Drawing.Point(6, 19);
-            this.divParamATextBox.Name = "divParamATextBox";
-            this.divParamATextBox.Size = new System.Drawing.Size(100, 20);
-            this.divParamATextBox.TabIndex = 1;
+            this.xorResultTextBox.Location = new System.Drawing.Point(255, 87);
+            this.xorResultTextBox.Name = "xorResultTextBox";
+            this.xorResultTextBox.ReadOnly = true;
+            this.xorResultTextBox.Size = new System.Drawing.Size(100, 20);
+            this.xorResultTextBox.TabIndex = 12;
             // 
-            // label3
+            // xorParamBTextBox
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(112, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(12, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "/";
+            this.xorParamBTextBox.Location = new System.Drawing.Point(130, 87);
+            this.xorParamBTextBox.Name = "xorParamBTextBox";
+            this.xorParamBTextBox.Size = new System.Drawing.Size(100, 20);
+            this.xorParamBTextBox.TabIndex = 10;
             // 
-            // divParamBTextBox
+            // xorParamATextBox
             // 
-            this.divParamBTextBox.Location = new System.Drawing.Point(130, 19);
-            this.divParamBTextBox.Name = "divParamBTextBox";
-            this.divParamBTextBox.Size = new System.Drawing.Size(100, 20);
-            this.divParamBTextBox.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(236, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "=";
+            this.xorParamATextBox.Location = new System.Drawing.Point(6, 87);
+            this.xorParamATextBox.Name = "xorParamATextBox";
+            this.xorParamATextBox.Size = new System.Drawing.Size(100, 20);
+            this.xorParamATextBox.TabIndex = 8;
             // 
             // divResultTextBox
             // 
@@ -220,46 +210,19 @@ namespace SysProg
             this.divResultTextBox.Size = new System.Drawing.Size(100, 20);
             this.divResultTextBox.TabIndex = 5;
             // 
-            // divCountButton
+            // divParamBTextBox
             // 
-            this.divCountButton.Location = new System.Drawing.Point(6, 45);
-            this.divCountButton.Name = "divCountButton";
-            this.divCountButton.Size = new System.Drawing.Size(75, 23);
-            this.divCountButton.TabIndex = 6;
-            this.divCountButton.Text = "Посчитать";
-            this.divCountButton.UseVisualStyleBackColor = true;
+            this.divParamBTextBox.Location = new System.Drawing.Point(130, 19);
+            this.divParamBTextBox.Name = "divParamBTextBox";
+            this.divParamBTextBox.Size = new System.Drawing.Size(100, 20);
+            this.divParamBTextBox.TabIndex = 3;
             // 
-            // label7
+            // divParamATextBox
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 71);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(159, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Операция исключающее ИЛИ";
-            // 
-            // xorParamATextBox
-            // 
-            this.xorParamATextBox.Location = new System.Drawing.Point(6, 87);
-            this.xorParamATextBox.Name = "xorParamATextBox";
-            this.xorParamATextBox.Size = new System.Drawing.Size(100, 20);
-            this.xorParamATextBox.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(112, 90);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "^";
-            // 
-            // xorParamBTextBox
-            // 
-            this.xorParamBTextBox.Location = new System.Drawing.Point(130, 87);
-            this.xorParamBTextBox.Name = "xorParamBTextBox";
-            this.xorParamBTextBox.Size = new System.Drawing.Size(100, 20);
-            this.xorParamBTextBox.TabIndex = 10;
+            this.divParamATextBox.Location = new System.Drawing.Point(6, 19);
+            this.divParamATextBox.Name = "divParamATextBox";
+            this.divParamATextBox.Size = new System.Drawing.Size(100, 20);
+            this.divParamATextBox.TabIndex = 1;
             // 
             // label5
             // 
@@ -270,22 +233,59 @@ namespace SysProg
             this.label5.TabIndex = 11;
             this.label5.Text = "=";
             // 
-            // xorResultTextBox
+            // label6
             // 
-            this.xorResultTextBox.Location = new System.Drawing.Point(255, 87);
-            this.xorResultTextBox.Name = "xorResultTextBox";
-            this.xorResultTextBox.ReadOnly = true;
-            this.xorResultTextBox.Size = new System.Drawing.Size(100, 20);
-            this.xorResultTextBox.TabIndex = 12;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(112, 90);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(13, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "^";
             // 
-            // xorCountButton
+            // label7
             // 
-            this.xorCountButton.Location = new System.Drawing.Point(6, 113);
-            this.xorCountButton.Name = "xorCountButton";
-            this.xorCountButton.Size = new System.Drawing.Size(75, 23);
-            this.xorCountButton.TabIndex = 13;
-            this.xorCountButton.Text = "Посчитать";
-            this.xorCountButton.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 71);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Операция исключающее ИЛИ";
+            // 
+            // divCountButton
+            // 
+            this.divCountButton.Location = new System.Drawing.Point(6, 45);
+            this.divCountButton.Name = "divCountButton";
+            this.divCountButton.Size = new System.Drawing.Size(75, 23);
+            this.divCountButton.TabIndex = 6;
+            this.divCountButton.Text = "Посчитать";
+            this.divCountButton.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(236, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(13, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "=";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(112, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(12, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "/";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Операция деления";
             // 
             // tabPage4
             // 
@@ -300,14 +300,13 @@ namespace SysProg
             this.tabPage4.Text = "Конструкция for";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // forRichTextBox
+            // forResultLabel
             // 
-            this.forRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.forRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.forRichTextBox.Name = "forRichTextBox";
-            this.forRichTextBox.Size = new System.Drawing.Size(761, 334);
-            this.forRichTextBox.TabIndex = 3;
-            this.forRichTextBox.Text = "";
+            this.forResultLabel.Location = new System.Drawing.Point(217, 345);
+            this.forResultLabel.Name = "forResultLabel";
+            this.forResultLabel.Size = new System.Drawing.Size(547, 23);
+            this.forResultLabel.TabIndex = 5;
+            this.forResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // checkForButton
             // 
@@ -318,13 +317,14 @@ namespace SysProg
             this.checkForButton.Text = "Проверить конструкцию языка";
             this.checkForButton.UseVisualStyleBackColor = true;
             // 
-            // forResultLabel
+            // forRichTextBox
             // 
-            this.forResultLabel.Location = new System.Drawing.Point(217, 345);
-            this.forResultLabel.Name = "forResultLabel";
-            this.forResultLabel.Size = new System.Drawing.Size(547, 23);
-            this.forResultLabel.TabIndex = 5;
-            this.forResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.forRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.forRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.forRichTextBox.Name = "forRichTextBox";
+            this.forRichTextBox.Size = new System.Drawing.Size(761, 334);
+            this.forRichTextBox.TabIndex = 3;
+            this.forRichTextBox.Text = "";
             // 
             // tabPage3
             // 
@@ -339,14 +339,13 @@ namespace SysProg
             this.tabPage3.Text = "Конструкция while";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // whileRichTextBox
+            // whileResultLabel
             // 
-            this.whileRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.whileRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.whileRichTextBox.Name = "whileRichTextBox";
-            this.whileRichTextBox.Size = new System.Drawing.Size(761, 334);
-            this.whileRichTextBox.TabIndex = 0;
-            this.whileRichTextBox.Text = "";
+            this.whileResultLabel.Location = new System.Drawing.Point(217, 343);
+            this.whileResultLabel.Name = "whileResultLabel";
+            this.whileResultLabel.Size = new System.Drawing.Size(547, 23);
+            this.whileResultLabel.TabIndex = 2;
+            this.whileResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // checkWhileButton
             // 
@@ -357,13 +356,14 @@ namespace SysProg
             this.checkWhileButton.Text = "Проверить конструкцию языка";
             this.checkWhileButton.UseVisualStyleBackColor = true;
             // 
-            // whileResultLabel
+            // whileRichTextBox
             // 
-            this.whileResultLabel.Location = new System.Drawing.Point(217, 343);
-            this.whileResultLabel.Name = "whileResultLabel";
-            this.whileResultLabel.Size = new System.Drawing.Size(547, 23);
-            this.whileResultLabel.TabIndex = 2;
-            this.whileResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.whileRichTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.whileRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.whileRichTextBox.Name = "whileRichTextBox";
+            this.whileRichTextBox.Size = new System.Drawing.Size(761, 334);
+            this.whileRichTextBox.TabIndex = 0;
+            this.whileRichTextBox.Text = "";
             // 
             // tabPage2
             // 
@@ -381,41 +381,14 @@ namespace SysProg
             this.tabPage2.Text = "Файл *.exe";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // fDataGridView
+            // deleteFButton
             // 
-            this.fDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.fDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.fDataGridView.Name = "fDataGridView";
-            this.fDataGridView.Size = new System.Drawing.Size(761, 334);
-            this.fDataGridView.TabIndex = 6;
-            // 
-            // exportFButton
-            // 
-            this.exportFButton.Location = new System.Drawing.Point(686, 345);
-            this.exportFButton.Name = "exportFButton";
-            this.exportFButton.Size = new System.Drawing.Size(75, 23);
-            this.exportFButton.TabIndex = 7;
-            this.exportFButton.Text = "Экспорт";
-            this.exportFButton.UseVisualStyleBackColor = true;
-            // 
-            // importFButton
-            // 
-            this.importFButton.Location = new System.Drawing.Point(605, 345);
-            this.importFButton.Name = "importFButton";
-            this.importFButton.Size = new System.Drawing.Size(75, 23);
-            this.importFButton.TabIndex = 8;
-            this.importFButton.Text = "Импорт";
-            this.importFButton.UseVisualStyleBackColor = true;
-            // 
-            // editFButton
-            // 
-            this.editFButton.Location = new System.Drawing.Point(87, 345);
-            this.editFButton.Name = "editFButton";
-            this.editFButton.Size = new System.Drawing.Size(75, 23);
-            this.editFButton.TabIndex = 9;
-            this.editFButton.Text = "Изменить";
-            this.editFButton.UseVisualStyleBackColor = true;
+            this.deleteFButton.Location = new System.Drawing.Point(168, 345);
+            this.deleteFButton.Name = "deleteFButton";
+            this.deleteFButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteFButton.TabIndex = 11;
+            this.deleteFButton.Text = "Удалить";
+            this.deleteFButton.UseVisualStyleBackColor = true;
             // 
             // addFButton
             // 
@@ -426,14 +399,41 @@ namespace SysProg
             this.addFButton.Text = "Добавить";
             this.addFButton.UseVisualStyleBackColor = true;
             // 
-            // deleteFButton
+            // editFButton
             // 
-            this.deleteFButton.Location = new System.Drawing.Point(168, 345);
-            this.deleteFButton.Name = "deleteFButton";
-            this.deleteFButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteFButton.TabIndex = 11;
-            this.deleteFButton.Text = "Удалить";
-            this.deleteFButton.UseVisualStyleBackColor = true;
+            this.editFButton.Location = new System.Drawing.Point(87, 345);
+            this.editFButton.Name = "editFButton";
+            this.editFButton.Size = new System.Drawing.Size(75, 23);
+            this.editFButton.TabIndex = 9;
+            this.editFButton.Text = "Изменить";
+            this.editFButton.UseVisualStyleBackColor = true;
+            // 
+            // importFButton
+            // 
+            this.importFButton.Location = new System.Drawing.Point(605, 345);
+            this.importFButton.Name = "importFButton";
+            this.importFButton.Size = new System.Drawing.Size(75, 23);
+            this.importFButton.TabIndex = 8;
+            this.importFButton.Text = "Импорт";
+            this.importFButton.UseVisualStyleBackColor = true;
+            // 
+            // exportFButton
+            // 
+            this.exportFButton.Location = new System.Drawing.Point(686, 345);
+            this.exportFButton.Name = "exportFButton";
+            this.exportFButton.Size = new System.Drawing.Size(75, 23);
+            this.exportFButton.TabIndex = 7;
+            this.exportFButton.Text = "Экспорт";
+            this.exportFButton.UseVisualStyleBackColor = true;
+            // 
+            // fDataGridView
+            // 
+            this.fDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.fDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.fDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.fDataGridView.Name = "fDataGridView";
+            this.fDataGridView.Size = new System.Drawing.Size(761, 334);
+            this.fDataGridView.TabIndex = 6;
             // 
             // tabPage1
             // 
@@ -451,41 +451,14 @@ namespace SysProg
             this.tabPage1.Text = "Интеренет ресурсы";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // rDataGridView
+            // deleteRButton
             // 
-            this.rDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.rDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
-            this.rDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.rDataGridView.Name = "rDataGridView";
-            this.rDataGridView.Size = new System.Drawing.Size(761, 334);
-            this.rDataGridView.TabIndex = 0;
-            // 
-            // exportRButton
-            // 
-            this.exportRButton.Location = new System.Drawing.Point(686, 343);
-            this.exportRButton.Name = "exportRButton";
-            this.exportRButton.Size = new System.Drawing.Size(75, 23);
-            this.exportRButton.TabIndex = 1;
-            this.exportRButton.Text = "Экспорт";
-            this.exportRButton.UseVisualStyleBackColor = true;
-            // 
-            // importRButton
-            // 
-            this.importRButton.Location = new System.Drawing.Point(605, 343);
-            this.importRButton.Name = "importRButton";
-            this.importRButton.Size = new System.Drawing.Size(75, 23);
-            this.importRButton.TabIndex = 2;
-            this.importRButton.Text = "Импорт";
-            this.importRButton.UseVisualStyleBackColor = true;
-            // 
-            // editRButton
-            // 
-            this.editRButton.Location = new System.Drawing.Point(87, 343);
-            this.editRButton.Name = "editRButton";
-            this.editRButton.Size = new System.Drawing.Size(75, 23);
-            this.editRButton.TabIndex = 3;
-            this.editRButton.Text = "Изменить";
-            this.editRButton.UseVisualStyleBackColor = true;
+            this.deleteRButton.Location = new System.Drawing.Point(168, 343);
+            this.deleteRButton.Name = "deleteRButton";
+            this.deleteRButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteRButton.TabIndex = 5;
+            this.deleteRButton.Text = "Удалить";
+            this.deleteRButton.UseVisualStyleBackColor = true;
             // 
             // addRButton
             // 
@@ -496,14 +469,41 @@ namespace SysProg
             this.addRButton.Text = "Добавить";
             this.addRButton.UseVisualStyleBackColor = true;
             // 
-            // deleteRButton
+            // editRButton
             // 
-            this.deleteRButton.Location = new System.Drawing.Point(168, 343);
-            this.deleteRButton.Name = "deleteRButton";
-            this.deleteRButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteRButton.TabIndex = 5;
-            this.deleteRButton.Text = "Удалить";
-            this.deleteRButton.UseVisualStyleBackColor = true;
+            this.editRButton.Location = new System.Drawing.Point(87, 343);
+            this.editRButton.Name = "editRButton";
+            this.editRButton.Size = new System.Drawing.Size(75, 23);
+            this.editRButton.TabIndex = 3;
+            this.editRButton.Text = "Изменить";
+            this.editRButton.UseVisualStyleBackColor = true;
+            // 
+            // importRButton
+            // 
+            this.importRButton.Location = new System.Drawing.Point(605, 343);
+            this.importRButton.Name = "importRButton";
+            this.importRButton.Size = new System.Drawing.Size(75, 23);
+            this.importRButton.TabIndex = 2;
+            this.importRButton.Text = "Импорт";
+            this.importRButton.UseVisualStyleBackColor = true;
+            // 
+            // exportRButton
+            // 
+            this.exportRButton.Location = new System.Drawing.Point(686, 343);
+            this.exportRButton.Name = "exportRButton";
+            this.exportRButton.Size = new System.Drawing.Size(75, 23);
+            this.exportRButton.TabIndex = 1;
+            this.exportRButton.Text = "Экспорт";
+            this.exportRButton.UseVisualStyleBackColor = true;
+            // 
+            // rDataGridView
+            // 
+            this.rDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rDataGridView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.rDataGridView.Name = "rDataGridView";
+            this.rDataGridView.Size = new System.Drawing.Size(761, 334);
+            this.rDataGridView.TabIndex = 0;
             // 
             // tabControl1
             // 
