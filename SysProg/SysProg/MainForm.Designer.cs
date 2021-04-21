@@ -443,6 +443,7 @@ namespace SysProg
             this.fDataGridView.Location = new System.Drawing.Point(3, 3);
             this.fDataGridView.MultiSelect = false;
             this.fDataGridView.Name = "fDataGridView";
+            this.fDataGridView.ReadOnly = true;
             this.fDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.fDataGridView.Size = new System.Drawing.Size(761, 334);
             this.fDataGridView.TabIndex = 6;

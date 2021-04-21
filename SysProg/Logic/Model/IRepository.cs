@@ -12,7 +12,7 @@ namespace Logic.Model
         IList<T> Data { get; }
 
         void Add(T data);
-        void Edit(int index);
+        void Edit(int index, T data);
         void Delete(int index);
     }
 }
