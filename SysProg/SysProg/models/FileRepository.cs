@@ -72,7 +72,9 @@ namespace SysProg
         public void Import(string path)
         {
             DeleteAll();
-            CsvWorker.ImportFiles(path, Data);
+            List<File> files = new List<File>();
+            CsvWorker.ImportFiles(path, files);
+            _fileContext.Files.AddRange(files);
             _fileContext.SaveChanges();
         }
     }

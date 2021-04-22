@@ -1,6 +1,4 @@
 ﻿using LightInject;
-using Logic.contexts;
-using Logic.Model;
 using Logic.models;
 using SysProg.presenter;
 using SysProg.views;
@@ -12,10 +10,6 @@ namespace SysProg
     static class Program
     {
         public static readonly ApplicationContext context = new ApplicationContext();
-        public static readonly FileRepository fileRepository = new FileRepository();
-        public static readonly ResRepository resRepository = new ResRepository();
-        public static readonly StuctureAnalysisModel stuctureAnalysisModel = new StuctureAnalysisModel();
-        public static readonly LowLevelModel lowLevelMode = new LowLevelModel();
         
         /// <summary>
         /// Главная точка входа для приложения.
@@ -28,10 +22,10 @@ namespace SysProg
 
             ServiceContainer container = new ServiceContainer();
             container.RegisterInstance(context);
-            container.RegisterInstance(fileRepository);
-            container.RegisterInstance(resRepository);
-            container.RegisterInstance(stuctureAnalysisModel);
-            container.RegisterInstance(lowLevelMode);
+            container.Register<IStructureAnalysisModel, StuctureAnalysisModel>();
+            container.Register<ILowLevelModel, LowLevelModel>();
+            container.Register<IRepository<File>, FileRepository>();
+            container.Register<IRepository<Resource>, ResRepository>();
             container.Register<IMainView, MainForm>();
             container.Register<IFillView<File>, FileInputForm>();
             container.Register<IFillView<Resource>, ResourceInputForm>();

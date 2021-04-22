@@ -256,7 +256,7 @@ namespace SysProg.presenter
             string a = "", b = "";
             _view.GetXorParams(ref a, ref b);
             string result = _lowLevelModel.Xor(a, b);
-            _view.SetDivResult(result);
+            _view.SetXorResult(result);
             log.WriteToLog(result);
         }
 
