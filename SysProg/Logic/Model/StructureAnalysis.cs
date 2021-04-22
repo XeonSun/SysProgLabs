@@ -103,7 +103,7 @@ namespace Logic.Model
                         start += inserting.Length;
                         start = code.IndexOf(';', start);
                         if (start == -1)
-                            return 0;
+                            throw new ArgumentException("Не правильная конструкция for");
                         code = code.Insert(++start, "}");
                         break;
                 }
