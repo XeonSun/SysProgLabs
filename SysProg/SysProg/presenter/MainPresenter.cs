@@ -18,17 +18,21 @@ namespace SysProg.presenter
         private IFillView<Resource> _resourceView;
         private Controller _controller;
         private FileRepository _fileRepository;
-        private ResContext _resourceContext;
+        private ResRepository _resRepository;
+        private ResContext _resContext;
         private ILogWriter log= new LogWriter();
 
-        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResContext resourceContext, IFillView<File> fileView, IFillView<Resource> resourceView)
+        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResContext resourceContext,ResRepository resRepository,ResContext resContext, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
             _view = view;
             _controller = controller;
             _fileRepository = fileRepository;
-            _resourceContext = resourceContext;
+            _resContext = resourceContext;
             _fileView = fileView;
             _resourceView = resourceView;
+            _resRepository = resRepository;
+            _resContext = resContext;
+
 
             _view.WhileAnalysis += WhileAnalysis;
             _view.ForAnalysis += ForAnalysis;
@@ -49,10 +53,10 @@ namespace SysProg.presenter
             _fileView.Submit += AddFileToRep;
         }
 
-        private void AddRec()
+        private void AddRes()
         {
-            _fileView.Show();
-            _fileView.Submit += AddFileToRep;
+            _resourceView.Show();
+            _resourceView.Submit += AddResToRep;
         }
 
         private void AddFileToRep()
@@ -66,7 +70,30 @@ namespace SysProg.presenter
             log.WriteToLog("Добавление записи");
         }
 
+        private void AddResToRep()
+        {
+            Resource resource = new Resource();
+            _resourceView.GetData(resource);
+            _resRepository.Add(resource);
+            _resourceView.Close();
+            _resourceView = new ResourceInputForm();
+            _view.UpdateResourses(_resRepository.Data);
+            log.WriteToLog("Добавление записи");
+        }
+
         private void UpdateFile()
+        {
+            int index = 0;
+            _view.GetFileIndex(ref index);
+            if (index != -1 && index < _fileRepository.Data.Count)
+            {
+                _fileView.Show();
+                _fileView.Submit += UpdateFileInRep;
+                _fileView.SetData(_fileRepository.Data[index]);
+            }
+        }
+
+        private void UpdateResourses()
         {
             int index = 0;
             _view.GetFileIndex(ref index);
@@ -125,9 +152,10 @@ namespace SysProg.presenter
                             streamWriter.Write(str.ToString());
                         }
                     }
-                    
+                    Console.WriteLine("Файл экспортирован");
                 }
             }
+
         }
 
         private void ImportFiles()
@@ -154,7 +182,7 @@ namespace SysProg.presenter
                     _fileRepository.DeleteAll();
                     _fileRepository.AddRange(files);
                     _view.UpdateFiles(_fileRepository.Data);
-                    //log error // error toje nado dobavit// ya srat
+                    log.WriteToLog("Файл импортирован");
                 }
             }
         }

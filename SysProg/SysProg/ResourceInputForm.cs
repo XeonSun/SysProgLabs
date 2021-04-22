@@ -35,5 +35,10 @@ namespace SysProg
             errorLabel.Text = error;
         }
 
+        public new void Show()
+        {
+            base.Show();
+        }
+
     }
 }

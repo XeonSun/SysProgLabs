@@ -8,7 +8,7 @@ using Logic.models;
 
 namespace Logic.Model
 {
-    class ResRepository
+    public class ResRepository
     {
         private ResContext _resContext;
 
