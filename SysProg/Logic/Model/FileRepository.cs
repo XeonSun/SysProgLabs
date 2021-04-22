@@ -24,10 +24,9 @@ namespace Logic.Model
         public void Edit(int index, File data)
         {
             File updated = Data[index];
-            File file = _fileContext.Files.Where(x => x.Name == updated.Name && x.Version == updated.Version && x.Date == updated.Date).FirstOrDefault();
-            file.Name = data.Name;
-            file.Version = data.Version;
-            file.Date = data.Date;
+            updated.Name = data.Name;
+            updated.Version = data.Version;
+            updated.Date = data.Date;
            _fileContext.SaveChanges();
         }
 
