@@ -20,7 +20,7 @@ namespace SysProg.presenter
         private FileRepository _fileRepository;
         private ResRepository _resRepository;
         private ResContext _resContext;
-        private ILogWriter log= new LogWriter();
+        private ILogWriter log = new LogWriter();
 
         public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResContext resourceContext,ResRepository resRepository,ResContext resContext, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
