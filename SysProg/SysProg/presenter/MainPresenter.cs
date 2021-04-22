@@ -19,6 +19,7 @@ namespace SysProg.presenter
         private Controller _controller;
         private FileRepository _fileRepository;
         private ResourceContext _resourceContext;
+        private ILogWriter log= new LogWriter();
 
         public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResourceContext resourceContext, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
@@ -56,6 +57,7 @@ namespace SysProg.presenter
             _fileView.Close();
             _fileView = new FileInputForm();
             _view.UpdateFiles(_fileRepository.Data);
+            log.WriteToLog("Добавление записи");
         }
 
         private void UpdateFile()
@@ -75,6 +77,7 @@ namespace SysProg.presenter
             File file = new File();
             _fileView.GetData(file);
             int index = 0;
+            log.WriteToLog("Обновление записи " + index);
             _view.GetFileIndex(ref index);
             _fileRepository.Edit(index, file);
             _fileView.Close();
@@ -88,6 +91,7 @@ namespace SysProg.presenter
             _view.GetFileIndex(ref index);
             if (index != -1)
             {
+                log.WriteToLog("Удаление записи " + index);
                 _fileRepository.Delete(index);
                 _view.UpdateFiles(_fileRepository.Data);
             }
@@ -152,6 +156,7 @@ namespace SysProg.presenter
 
         private void WhileAnalysis()
         {
+            log.WriteToLog("Анализ конструкции языка While");
             string structure = "";
             _view.GetWhileStruct(ref structure);
             string result;
@@ -167,12 +172,14 @@ namespace SysProg.presenter
             catch(Exception)
             {
                 result = "Строка должна быть конструкцией языка C#.";
+                log.WriteToLog("Строка должна быть конструкцией языка C#.");
             }
             _view.SetWhileResult(result);
         }
 
         private void ForAnalysis()
         {
+            log.WriteToLog("Анализ конструкции языка For");
             string structure = "";
             _view.GetForStruct(ref structure);
             string result;
@@ -180,45 +187,58 @@ namespace SysProg.presenter
             {
                 int analysis = StructureAnalysis.CheckStructFor(structure);
                 result = "Конструкция for выполниться " + analysis + " раз.";
+                log.WriteToLog("Конструкция for выполниться " + analysis + " раз.");
             }
             catch (ArgumentException ex)
             {
                 result = ex.Message;
+                log.WriteToLog("Некорректные аргументы "+ex.Message);
             }
             catch (Exception)
             {
                 result = "Строка должна быть конструкцией языка C#.";
+                log.WriteToLog("Строка должна быть конструкцией языка C#.");
             }
             _view.SetForResult(result);
         }
 
         private void DivCalculate()
         {
+            log.WriteToLog("Вычисление низкоуровневой функции деления");
             string a = "", b = "";
             _view.GetDivParams(ref a, ref b);
             int x = 0, y = 0;
             if (!int.TryParse(a, out x) || !int.TryParse(b, out y))
+            {
                 _view.SetDivResult("Не корректные входные данные.");
-            else {
+                log.WriteToLog(": Не корректные входные данные.");
+            }
+            else
+            {
                 try
                 {
                     int result = LowLevelFunctions.LowLevelFunctions.LowLelelDiv(x, y);
                     _view.SetDivResult(result.ToString());
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    _view.SetDivResult(ex.Message);
+                    _view.SetDivResult("Ошибка");
+                    log.WriteToLog("Произошла ошибка при вычислении: " + ex.Message);
                 }
-        }      
+            }      
         }
 
         private void XorCalculate()
         {
+            log.WriteToLog("Вычисление низкоуровневой функции XOR");
             string a = "", b = "";
             _view.GetXorParams(ref a, ref b);
             int x = 0, y = 0;
             if (!int.TryParse(a, out x) || !int.TryParse(b, out y))
-                _view.SetXorResult("Не корректные входные данные.");
+            {
+                _view.SetXorResult(DateTime.Now + "Не корректные входные данные.");
+                log.WriteToLog("Не корректные входные данные.");
+            }
             else
                 _view.SetXorResult(LowLevelFunctions.LowLevelFunctions.LowLelelXor(x, y).ToString());
         }
@@ -226,6 +246,7 @@ namespace SysProg.presenter
         public void Run()
         {
             _view.Show();
+            log.WriteToLog("Приложение запущено");
         }
     }
 }

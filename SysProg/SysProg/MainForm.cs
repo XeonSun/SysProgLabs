@@ -2,6 +2,7 @@
 using SysProg.views;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SysProg
@@ -118,5 +119,12 @@ namespace SysProg
             _context.MainForm = this;
             Application.Run(this);
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            TextBoxWriter writer = new TextBoxWriter(richTextBoxLogs);
+            Console.SetOut(writer);
+        }
     }
 }
+
