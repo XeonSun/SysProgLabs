@@ -3,9 +3,9 @@ using System.Data.Entity;
 
 namespace Logic.contexts
 {
-    public class ResourceContext : DbContext
+    public class ResContext : DbContext
     {
-        public ResourceContext()
+        public ResContext()
             : base("DbConnection")
         { }
 

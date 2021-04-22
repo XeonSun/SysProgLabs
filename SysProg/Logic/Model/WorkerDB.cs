@@ -10,7 +10,7 @@ namespace Logic.Model
         {
             try
             {
-                using (ResourceContext context = new ResourceContext())
+                using (ResContext context = new ResContext())
                 {
                     context.Resources.AddRange(resources);
                     context.SaveChanges();
@@ -38,7 +38,7 @@ namespace Logic.Model
         {
             try
             {
-                using (ResourceContext context = new ResourceContext())
+                using (ResContext context = new ResContext())
                 {
                     return context.Resources;
                 }
