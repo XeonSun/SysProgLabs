@@ -10,7 +10,6 @@ namespace SysProg
         public ResourceInputForm()
         {
             InitializeComponent();
-
             submitButton.Click += (sender, args) => { if (Submit != null) Submit(); };
         }
 
@@ -19,14 +18,14 @@ namespace SysProg
         public void GetData(Resource resource)
         {
             resource.Address = resourceAddressBox.Text;
-            resource.Type = resourceModeBox.Text;
+            resource.Type = resTypeComboBox.Text;
             resource.Date = resourceDatePicker.Value;
         }
 
         public void SetData(Resource resource)
         {
             resourceAddressBox.Text = resource.Address;
-            resourceModeBox.Text = resource.Type;
+            resTypeComboBox.Text = resource.Type;
             resourceDatePicker.Value = resource.Date;
         }
 

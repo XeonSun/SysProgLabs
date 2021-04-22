@@ -32,11 +32,11 @@ namespace SysProg
             this.resourceAddressBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.resourceModeBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.resourceDatePicker = new System.Windows.Forms.DateTimePicker();
             this.submitButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.resTypeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // resourceAddressBox
@@ -63,13 +63,6 @@ namespace SysProg
             this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Режим доступа";
-            // 
-            // resourceModeBox
-            // 
-            this.resourceModeBox.Location = new System.Drawing.Point(12, 63);
-            this.resourceModeBox.Name = "resourceModeBox";
-            this.resourceModeBox.Size = new System.Drawing.Size(360, 20);
-            this.resourceModeBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -104,17 +97,29 @@ namespace SysProg
             this.errorLabel.TabIndex = 7;
             this.errorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // resTypeComboBox
+            // 
+            this.resTypeComboBox.DisplayMember = "0";
+            this.resTypeComboBox.FormattingEnabled = true;
+            this.resTypeComboBox.Items.AddRange(new object[] {
+            "Открытый",
+            "Закрытый"});
+            this.resTypeComboBox.Location = new System.Drawing.Point(12, 62);
+            this.resTypeComboBox.Name = "resTypeComboBox";
+            this.resTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.resTypeComboBox.TabIndex = 8;
+            // 
             // ResourceInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 187);
+            this.Controls.Add(this.resTypeComboBox);
             this.Controls.Add(this.errorLabel);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.resourceDatePicker);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.resourceModeBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resourceAddressBox);
             this.Name = "ResourceInputForm";
@@ -129,10 +134,10 @@ namespace SysProg
         private System.Windows.Forms.TextBox resourceAddressBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox resourceModeBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker resourceDatePicker;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.ComboBox resTypeComboBox;
     }
 }

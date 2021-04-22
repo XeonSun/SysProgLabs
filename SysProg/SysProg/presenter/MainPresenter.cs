@@ -49,6 +49,7 @@ namespace SysProg.presenter
             _view.ImportFiles += ImportFiles;
 
             _view.UpdateFiles(_fileRepository.Data);
+            _view.UpdateResources(_resRepository.Data);
         }
 
         private void AddFile()
@@ -106,7 +107,8 @@ namespace SysProg.presenter
         private void UpdateResourses()
         {
             int index = 0;
-            _view.GetFileIndex(ref index);
+            
+            _view.GetRecourceIndex(ref index);
             if (index != -1 && index < _resRepository.Data.Count)
             {
                 _resourceView.Show();
