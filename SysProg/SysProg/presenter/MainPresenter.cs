@@ -19,19 +19,16 @@ namespace SysProg.presenter
         private Controller _controller;
         private FileRepository _fileRepository;
         private ResRepository _resRepository;
-        private ResContext _resContext;
         private ILogWriter log= new LogWriter();
 
-        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResContext resourceContext,ResRepository resRepository,ResContext resContext, IFillView<File> fileView, IFillView<Resource> resourceView)
+        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository,ResRepository resRepository, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
             _view = view;
             _controller = controller;
             _fileRepository = fileRepository;
-            _resContext = resourceContext;
             _fileView = fileView;
             _resourceView = resourceView;
             _resRepository = resRepository;
-            _resContext = resContext;
 
 
             _view.WhileAnalysis += WhileAnalysis;
@@ -39,8 +36,12 @@ namespace SysProg.presenter
             _view.DivCalculation += DivCalculate;
             _view.XorCalculation += XorCalculate;
             _view.AddFile += AddFile;
+            _view.AddResource += AddRes;
             _view.UpdateFile += UpdateFile;
+            _view.UpdateResource += UpdateResourses;
+
             _view.DeleteFile += DeleteFile;
+            _view.DeleteResource += DeleteRes;
             _view.ExportFiles += ExportFiles;
             _view.ImportFiles += ImportFiles;
 
@@ -77,7 +78,7 @@ namespace SysProg.presenter
             _resRepository.Add(resource);
             _resourceView.Close();
             _resourceView = new ResourceInputForm();
-            _view.UpdateResourses(_resRepository.Data);
+            _view.UpdateResources(_resRepository.Data);
             log.WriteToLog("Добавление записи");
         }
 
@@ -97,11 +98,11 @@ namespace SysProg.presenter
         {
             int index = 0;
             _view.GetFileIndex(ref index);
-            if (index != -1 && index < _fileRepository.Data.Count)
+            if (index != -1 && index < _resRepository.Data.Count)
             {
-                _fileView.Show();
-                _fileView.Submit += UpdateFileInRep;
-                _fileView.SetData(_fileRepository.Data[index]);
+                _resourceView.Show();
+                _resourceView.Submit += UpdateResInRep;
+                _resourceView.SetData(_resRepository.Data[index]);
             }
         }
 
@@ -118,6 +119,22 @@ namespace SysProg.presenter
             _view.UpdateFiles(_fileRepository.Data);
         }
 
+
+        private void UpdateResInRep()
+        {
+            Resource res = new Resource();
+            _resourceView.GetData(res);
+            int index = 0;
+            log.WriteToLog("Обновление записи " + index);
+            _view.GetRecourceIndex(ref index);
+            _resRepository.Edit(index, res);
+            _resourceView.Close();
+            _resourceView = new ResourceInputForm();
+            _view.UpdateResources(_resRepository.Data);
+        }
+
+
+
         private void DeleteFile()
         {
             int index = 0;
@@ -127,6 +144,18 @@ namespace SysProg.presenter
                 log.WriteToLog("Удаление записи " + index);
                 _fileRepository.Delete(index);
                 _view.UpdateFiles(_fileRepository.Data);
+            }
+        }
+
+        private void DeleteRes()
+        {
+            int index = 0;
+            _view.GetRecourceIndex(ref index);
+            if (index != -1)
+            {
+                log.WriteToLog("Удаление записи " + index);
+                _resRepository.Delete(index);
+                _view.UpdateResources(_resRepository.Data);
             }
         }
 
