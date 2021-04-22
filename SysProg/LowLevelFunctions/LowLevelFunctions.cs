@@ -8,6 +8,7 @@ namespace LowLevelFunctions
         private delegate int Operation(int a, int b);
         public static int LowLelelDiv(int a,int b)
         {
+            Console.Write("Low Level Div \n");
             Type[] OperationArgs = { typeof(int), typeof(int) };
             DynamicMethod div = new DynamicMethod("Div", typeof(int), OperationArgs);
             ILGenerator il = div.GetILGenerator(256);

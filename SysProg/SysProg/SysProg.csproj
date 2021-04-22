@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="LogWriter.cs" />
     <Compile Include="ResourceInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +89,7 @@
     </Compile>
     <Compile Include="presenter\IPresenter.cs" />
     <Compile Include="presenter\MainPresenter.cs" />
+    <Compile Include="TextBoxWriter.cs" />
     <Compile Include="views\IFillView.cs" />
     <Compile Include="views\IMainView.cs" />
     <Compile Include="views\IView.cs" />

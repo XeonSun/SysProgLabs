@@ -2,6 +2,7 @@
 using SysProg.views;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SysProg
@@ -22,8 +23,6 @@ namespace SysProg
             addFButton.Click += (sender, args) => Invoke(AddFile);
             editFButton.Click += (sender, args) => Invoke(UpdateFile);
             deleteFButton.Click += (sender, args) => Invoke(DeleteFile);
-            richTextBoxLogs.Text+= System.Diagnostics.Process.GetCurrentProcess().StandardOutput;
-            Console.WriteLine("stdout");
         }
 
         private void Invoke(Action action)
@@ -114,5 +113,12 @@ namespace SysProg
             _context.MainForm = this;
             Application.Run(this);
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            TextBoxWriter writer = new TextBoxWriter(richTextBoxLogs);
+            Console.SetOut(writer);
+        }
     }
 }
+

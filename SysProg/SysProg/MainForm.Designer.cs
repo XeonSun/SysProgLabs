@@ -594,6 +594,7 @@ namespace SysProg
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Лаба по системному программированию";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage5.ResumeLayout(false);
