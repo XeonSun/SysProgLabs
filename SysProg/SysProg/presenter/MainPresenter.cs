@@ -57,7 +57,6 @@ namespace SysProg.presenter
             _view.GetFileIndex(ref index);
             if (index != -1 && index < _fileRepository.Data.Count)
             {
-                Console.WriteLine(index);
                 _fileView.Show();
                 _fileView.Submit += UpdateFileInRep;
                 _fileView.SetData(_fileRepository.Data[index]);
