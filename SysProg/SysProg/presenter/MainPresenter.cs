@@ -64,11 +64,17 @@ namespace SysProg.presenter
         {
             File file = new File();
             _fileView.GetData(file);
-            _fileRepository.Add(file);
-            _fileView.Close();
-            _fileView = new FileInputForm();
-            _view.UpdateFiles(_fileRepository.Data);
-            log.WriteToLog("Добавление записи");
+            if (file.Name.EndsWith(".exe"))
+            {
+                _fileRepository.Add(file);
+                _fileView.Close();
+                _fileView = new FileInputForm();
+                _view.UpdateFiles(_fileRepository.Data);
+                log.WriteToLog("Добавление записи");
+            } else
+            {
+                _fileView.SetError("Имя файла должно оканчиваться на .exe");
+            }
         }
 
         private void AddResToRep()
@@ -110,13 +116,20 @@ namespace SysProg.presenter
         {
             File file = new File();
             _fileView.GetData(file);
-            int index = 0;
-            log.WriteToLog("Обновление записи " + index);
-            _view.GetFileIndex(ref index);
-            _fileRepository.Edit(index, file);
-            _fileView.Close();
-            _fileView = new FileInputForm();
-            _view.UpdateFiles(_fileRepository.Data);
+            if (file.Name.EndsWith(".exe"))
+            {
+                int index = 0;
+                log.WriteToLog("Обновление записи " + index);
+                _view.GetFileIndex(ref index);
+                _fileRepository.Edit(index, file);
+                _fileView.Close();
+                _fileView = new FileInputForm();
+                _view.UpdateFiles(_fileRepository.Data);
+            }
+            else
+            {
+                _fileView.SetError("Имя файла должно оканчиваться на .exe");
+            }
         }
 
 
@@ -166,6 +179,7 @@ namespace SysProg.presenter
                 openFileDialog.Filter = "csv files (*.csv)|*.csv";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
+                openFileDialog.CheckFileExists = false;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
