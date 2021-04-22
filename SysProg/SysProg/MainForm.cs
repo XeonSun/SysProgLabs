@@ -22,8 +22,8 @@ namespace SysProg
             addFButton.Click += (sender, args) => Invoke(AddFile);
             editFButton.Click += (sender, args) => Invoke(UpdateFile);
             deleteFButton.Click += (sender, args) => Invoke(DeleteFile);
-            //richTextBoxLogs.Text+= System.Diagnostics.Process.GetCurrentProcess().StandardOutput;
-            //Console.WriteLine("stdout");
+            exportFButton.Click += (sender, args) => Invoke(ExportFiles);
+            importFButton.Click += (sender, args) => Invoke(ImportFiles);
         }
 
         private void Invoke(Action action)
@@ -42,6 +42,8 @@ namespace SysProg
         public event Action AddFile;
         public event Action UpdateFile;
         public event Action DeleteFile;
+        public event Action ExportFiles;
+        public event Action ImportFiles;
 
         public event Action AddResource;
         public event Action UpdateResource;
@@ -49,8 +51,10 @@ namespace SysProg
 
         public void LoadFiles(IList<File> files)
         {
-            for(int i =0; i < fDataGridView.Rows.Count; i++)
-                files.Add(new File((string)fDataGridView.Rows[i].Cells[0].Value, (string)fDataGridView.Rows[i].Cells[0].Value, DateTime.Parse(fDataGridView.Rows[i].Cells[0].Value.ToString())));
+            for (int i = 0; i < fDataGridView.Rows.Count - 1; i++)
+            {
+                files.Add(new File((string)fDataGridView.Rows[i].Cells[0].Value, (string)fDataGridView.Rows[i].Cells[1].Value, DateTime.Parse(fDataGridView.Rows[i].Cells[2].Value.ToString())));
+            }
         }
 
         public void UpdateFiles(IList<File> files)

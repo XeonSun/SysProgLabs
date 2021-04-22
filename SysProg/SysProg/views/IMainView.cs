@@ -9,6 +9,8 @@ namespace SysProg.views
         void LoadFiles(IList<File> files);
         void UpdateFiles(IList<File> files);
         void GetFileIndex(ref int index);
+        event Action ExportFiles;
+        event Action ImportFiles;
         event Action AddFile;
         event Action UpdateFile;
         event Action DeleteFile;
