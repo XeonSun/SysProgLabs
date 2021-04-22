@@ -93,7 +93,7 @@ namespace SysProg
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(360, 23);
             this.submitButton.TabIndex = 6;
-            this.submitButton.Text = "Добавить";
+            this.submitButton.Text = "Добавить/Изменить";
             this.submitButton.UseVisualStyleBackColor = true;
             // 
             // errorLabel
@@ -118,7 +118,7 @@ namespace SysProg
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resourceAddressBox);
             this.Name = "ResourceInputForm";
-            this.Text = "Добавить файл";
+            this.Text = "Работа с записями";
             this.ResumeLayout(false);
             this.PerformLayout();
 

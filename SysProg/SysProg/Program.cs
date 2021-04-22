@@ -13,7 +13,7 @@ namespace SysProg
     {
         public static readonly ApplicationContext context = new ApplicationContext();
         public static readonly FileRepository fileRepository = new FileRepository();
-        public static readonly ResourceContext resourceContext = new ResourceContext();
+        public static readonly ResContext resourceContext = new ResContext();
 
         /// <summary>
         /// Главная точка входа для приложения.

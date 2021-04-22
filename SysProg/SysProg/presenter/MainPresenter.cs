@@ -18,10 +18,10 @@ namespace SysProg.presenter
         private IFillView<Resource> _resourceView;
         private Controller _controller;
         private FileRepository _fileRepository;
-        private ResourceContext _resourceContext;
+        private ResContext _resourceContext;
         private ILogWriter log= new LogWriter();
 
-        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResourceContext resourceContext, IFillView<File> fileView, IFillView<Resource> resourceView)
+        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository, ResContext resourceContext, IFillView<File> fileView, IFillView<Resource> resourceView)
         {
             _view = view;
             _controller = controller;
@@ -44,6 +44,12 @@ namespace SysProg.presenter
         }
 
         private void AddFile()
+        {
+            _fileView.Show();
+            _fileView.Submit += AddFileToRep;
+        }
+
+        private void AddRec()
         {
             _fileView.Show();
             _fileView.Submit += AddFileToRep;

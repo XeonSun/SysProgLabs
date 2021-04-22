@@ -52,11 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="contexts\FileContext.cs" />
-    <Compile Include="contexts\ResourceContext.cs" />
+    <Compile Include="contexts\ResContext.cs" />
     <Compile Include="models\File.cs" />
     <Compile Include="models\Resource.cs" />
     <Compile Include="Model\FileRepository.cs" />
     <Compile Include="Model\IRepository.cs" />
+    <Compile Include="Model\ResRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\StructureAnalysis.cs" />
   </ItemGroup>
