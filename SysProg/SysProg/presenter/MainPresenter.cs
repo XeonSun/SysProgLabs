@@ -140,22 +140,13 @@ namespace SysProg.presenter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string filePath = openFileDialog.FileName;
                     List<File> files = new List<File>();
                     _view.LoadFiles(files);
-                    using (var streamWriter = new StreamWriter(filePath, false))
-                    {
-                        foreach (var file in files)
-                        {
-                            var str = new StringBuilder();
-                            str.Append(file.Name).Append(',').Append(file.Version).Append(',').Append(file.Date).Append('\n');
-                            streamWriter.Write(str.ToString());
-                        }
-                    }
-                    Console.WriteLine("Файл экспортирован");
+                    CsvWorker.ExportFiles(openFileDialog.FileName, files);
+                    log.WriteToLog($@"Успешный экспорт {openFileDialog.FileName}");
                 }
-            }
 
+            }
         }
 
         private void ImportFiles()
@@ -168,21 +159,18 @@ namespace SysProg.presenter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string filePath = openFileDialog.FileName;
-                    List<File> files = new List<File>();
-                    using (var streamReader = new StreamReader(filePath))
+                    try
                     {
-                        while (!streamReader.EndOfStream)
-                        {
-                            string data = streamReader.ReadLine();
-                            var file = data.Split(',');
-                            files.Add(new File(file[0], file[1], DateTime.Parse(file[2])));
-                        }
+                        List<File> files = new List<File>();
+                        CsvWorker.ImportFiles(openFileDialog.FileName, files);
+                        _fileRepository.DeleteAll();
+                        _fileRepository.AddRange(files);
+                        _view.UpdateFiles(_fileRepository.Data);
+                    } catch
+                    {
+                        log.WriteToLog("Не корректное содержимое файла");
                     }
-                    _fileRepository.DeleteAll();
-                    _fileRepository.AddRange(files);
-                    _view.UpdateFiles(_fileRepository.Data);
-                    log.WriteToLog("Файл импортирован");
+                    log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
                 }
             }
         }

@@ -56,12 +56,11 @@
     <Compile Include="models\File.cs" />
     <Compile Include="models\Resource.cs" />
     <Compile Include="Model\FileRepository.cs" />
+    <Compile Include="Model\CsvWorker.cs" />
     <Compile Include="Model\IRepository.cs" />
     <Compile Include="Model\ResRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\StructureAnalysis.cs" />
-    <Compile Include="Model\WorkerCSV.cs" />
-    <Compile Include="Model\WorkerDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
