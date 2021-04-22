@@ -1,13 +1,11 @@
-﻿using SysProg.views;
-using Logic.contexts;
+﻿using Logic.contexts;
 using Logic.Model;
 using Logic.models;
+using SysProg.views;
 using System;
-using System.Windows.Forms;
-using System.IO;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using File = Logic.models.File;
-using System.Text;
 
 namespace SysProg.presenter
 {
@@ -17,17 +15,21 @@ namespace SysProg.presenter
         private IFillView<File> _fileView;
         private IFillView<Resource> _resourceView;
         private Controller _controller;
-        private FileRepository _fileRepository;
-        private ResRepository _resRepository;
+        private IRepository<File> _fileRepository;
+        private IRepository<Resource> _resRepository;
+        private ILowLevelModel _lowLevelModel;
+        private IStructureAnalysisModel _analysisModel;
         private ResContext _resContext;
         private ILogWriter log = new LogWriter();
 
-        public MainPresenter(IMainView view, Controller controller, FileRepository fileRepository,ResRepository resRepository, IFillView<File> fileView, IFillView<Resource> resourceView)
+        public MainPresenter(IMainView view, Controller controller, IRepository<File> fileRepository, IRepository<Resource> resRepository, IFillView<File> fileView, IFillView<Resource> resourceView, IStructureAnalysisModel analysisModel, ILowLevelModel lowLevelModel)
         {
             _view = view;
             _controller = controller;
             _fileRepository = fileRepository;
             _fileView = fileView;
+            _lowLevelModel = lowLevelModel;
+            _analysisModel = analysisModel;
             _resourceView = resourceView;
             _resRepository = resRepository;
 
@@ -65,16 +67,16 @@ namespace SysProg.presenter
         {
             File file = new File();
             _fileView.GetData(file);
-            if (file.Name.EndsWith(".exe"))
+            try
             {
                 _fileRepository.Add(file);
                 _fileView.Close();
                 _fileView = new FileInputForm();
                 _view.UpdateFiles(_fileRepository.Data);
                 log.WriteToLog("Добавление записи");
-            } else
+            } catch(Exception ex)
             {
-                _fileView.SetError("Имя файла должно оканчиваться на .exe");
+                _fileView.SetError(ex.Message);
             }
         }
 
@@ -117,8 +119,7 @@ namespace SysProg.presenter
         {
             File file = new File();
             _fileView.GetData(file);
-            if (file.Name.EndsWith(".exe"))
-            {
+            try { 
                 int index = 0;
                 log.WriteToLog("Обновление записи " + index);
                 _view.GetFileIndex(ref index);
@@ -127,9 +128,9 @@ namespace SysProg.presenter
                 _fileView = new FileInputForm();
                 _view.UpdateFiles(_fileRepository.Data);
             }
-            else
+            catch(Exception ex)
             {
-                _fileView.SetError("Имя файла должно оканчиваться на .exe");
+                _fileView.SetError(ex.Message);
             }
         }
 
@@ -153,12 +154,13 @@ namespace SysProg.presenter
         {
             int index = 0;
             _view.GetFileIndex(ref index);
-            if (index != -1)
+            try
             {
                 log.WriteToLog("Удаление записи " + index);
                 _fileRepository.Delete(index);
                 _view.UpdateFiles(_fileRepository.Data);
             }
+            catch { }
         }
 
         private void DeleteRes()
@@ -184,9 +186,7 @@ namespace SysProg.presenter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    List<File> files = new List<File>();
-                    _view.LoadFiles(files);
-                    CsvWorker.ExportFiles(openFileDialog.FileName, files);
+                    _fileRepository.Export(openFileDialog.FileName);
                     log.WriteToLog($@"Успешный экспорт {openFileDialog.FileName}");
                 }
 
@@ -206,9 +206,7 @@ namespace SysProg.presenter
                     try
                     {
                         List<File> files = new List<File>();
-                        CsvWorker.ImportFiles(openFileDialog.FileName, files);
-                        _fileRepository.DeleteAll();
-                        _fileRepository.AddRange(files);
+                        _fileRepository.Import(openFileDialog.FileName);
                         _view.UpdateFiles(_fileRepository.Data);
                     } catch
                     {
@@ -225,21 +223,8 @@ namespace SysProg.presenter
             log.WriteToLog("Анализ конструкции языка While");
             string structure = "";
             _view.GetWhileStruct(ref structure);
-            string result;
-            try
-            {
-                bool analysis = StructureAnalysis.CheckStructWhile(structure);
-                result = analysis ? "Конструкция while выполнится хотя бы 1 раз." : "Конструкция while не выполнится ни разу.";
-            }
-            catch(ArgumentException ex)
-            {
-                result = ex.Message;
-            }
-            catch(Exception)
-            {
-                result = "Строка должна быть конструкцией языка C#.";
-                log.WriteToLog("Строка должна быть конструкцией языка C#.");
-            }
+            string result = _analysisModel.AnalysisWhile(structure);
+            log.WriteToLog(result);
             _view.SetWhileResult(result);
         }
 
@@ -248,23 +233,8 @@ namespace SysProg.presenter
             log.WriteToLog("Анализ конструкции языка For");
             string structure = "";
             _view.GetForStruct(ref structure);
-            string result;
-            try
-            {
-                int analysis = StructureAnalysis.CheckStructFor(structure);
-                result = "Конструкция for выполниться " + analysis + " раз.";
-                log.WriteToLog("Конструкция for выполниться " + analysis + " раз.");
-            }
-            catch (ArgumentException ex)
-            {
-                result = ex.Message;
-                log.WriteToLog("Некорректные аргументы "+ex.Message);
-            }
-            catch (Exception)
-            {
-                result = "Строка должна быть конструкцией языка C#.";
-                log.WriteToLog("Строка должна быть конструкцией языка C#.");
-            }
+            string result = _analysisModel.AnalysisFor(structure);
+            log.WriteToLog(result);
             _view.SetForResult(result);
         }
 
@@ -273,25 +243,9 @@ namespace SysProg.presenter
             log.WriteToLog("Вычисление низкоуровневой функции деления");
             string a = "", b = "";
             _view.GetDivParams(ref a, ref b);
-            int x = 0, y = 0;
-            if (!int.TryParse(a, out x) || !int.TryParse(b, out y))
-            {
-                _view.SetDivResult("Не корректные входные данные.");
-                log.WriteToLog(": Не корректные входные данные.");
-            }
-            else
-            {
-                try
-                {
-                    int result = LowLevelFunctions.LowLevelFunctions.LowLelelDiv(x, y);
-                    _view.SetDivResult(result.ToString());
-                }
-                catch (Exception ex)
-                {
-                    _view.SetDivResult("Ошибка");
-                    log.WriteToLog("Произошла ошибка при вычислении: " + ex.Message);
-                }
-            }      
+            string result = _lowLevelModel.Div(a, b);
+            _view.SetDivResult(result);
+            log.WriteToLog(result);
         }
 
         private void XorCalculate()
@@ -299,14 +253,9 @@ namespace SysProg.presenter
             log.WriteToLog("Вычисление низкоуровневой функции XOR");
             string a = "", b = "";
             _view.GetXorParams(ref a, ref b);
-            int x = 0, y = 0;
-            if (!int.TryParse(a, out x) || !int.TryParse(b, out y))
-            {
-                _view.SetXorResult(DateTime.Now + "Не корректные входные данные.");
-                log.WriteToLog("Не корректные входные данные.");
-            }
-            else
-                _view.SetXorResult(LowLevelFunctions.LowLevelFunctions.LowLelelXor(x, y).ToString());
+            string result = _lowLevelModel.Xor(a, b);
+            _view.SetDivResult(result);
+            log.WriteToLog(result);
         }
 
         public void Run()

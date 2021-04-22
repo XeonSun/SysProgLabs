@@ -14,6 +14,9 @@ namespace SysProg
         public static readonly ApplicationContext context = new ApplicationContext();
         public static readonly FileRepository fileRepository = new FileRepository();
         public static readonly ResRepository resRepository = new ResRepository();
+        public static readonly StuctureAnalysisModel stuctureAnalysisModel = new StuctureAnalysisModel();
+        public static readonly LowLevelModel lowLevelMode = new LowLevelModel();
+        
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -27,6 +30,8 @@ namespace SysProg
             container.RegisterInstance(context);
             container.RegisterInstance(fileRepository);
             container.RegisterInstance(resRepository);
+            container.RegisterInstance(stuctureAnalysisModel);
+            container.RegisterInstance(lowLevelMode);
             container.Register<IMainView, MainForm>();
             container.Register<IFillView<File>, FileInputForm>();
             container.Register<IFillView<Resource>, ResourceInputForm>();

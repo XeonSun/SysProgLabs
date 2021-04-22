@@ -70,6 +70,13 @@
     <Compile Include="Controller.cs" />
     <Compile Include="ILogWriter.cs" />
     <Compile Include="LogWriter.cs" />
+    <Compile Include="models\FileRepository.cs" />
+    <Compile Include="models\ILowLevelModel.cs" />
+    <Compile Include="models\IRepository.cs" />
+    <Compile Include="models\IStructureAnalysisModel.cs" />
+    <Compile Include="models\LowLevelModel.cs" />
+    <Compile Include="models\ResRepository.cs" />
+    <Compile Include="models\StuctureAnalysisModel.cs" />
     <Compile Include="ResourceInputForm.cs">
       <SubType>Form</SubType>
     </Compile>

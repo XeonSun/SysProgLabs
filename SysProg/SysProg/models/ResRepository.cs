@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Logic.contexts;
+using Logic.models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Logic.contexts;
-using Logic.models;
 
-namespace Logic.Model
+namespace SysProg
 {
-    public class ResRepository
+    public class ResRepository: IRepository<Resource>
     {
         private ResContext _resContext;
 
@@ -21,6 +18,7 @@ namespace Logic.Model
 
         public void Add(Resource data)
         {
+            
             _resContext.Resources.Add(data);
             _resContext.SaveChanges();
         }
@@ -40,6 +38,16 @@ namespace Logic.Model
                 _resContext.Resources.Remove(Data[index]);
                 _resContext.SaveChanges();
             }
+        }
+
+        public void Import(string path)
+        {
+
+        }
+
+        public void Export(string path)
+        {
+
         }
     }
 }

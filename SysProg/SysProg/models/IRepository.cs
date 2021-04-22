@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic.Model
+namespace SysProg
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         IList<T> Data { get; }
 
         void Add(T data);
         void Edit(int index, T data);
         void Delete(int index);
+        void Import(string path);
+        void Export(string path);
     }
 }
