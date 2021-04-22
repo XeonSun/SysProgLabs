@@ -110,6 +110,7 @@ namespace SysProg.presenter
                 openFileDialog.Filter = "csv files (*.csv)|*.csv";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
+                openFileDialog.CheckFileExists = false;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
