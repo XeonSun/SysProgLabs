@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SysProg
 {
-    class LogWriter:ILogWriter
+    interface ILogWriter
     {
-        public void WriteToLog(string s)
-        {
-            Console.Write(DateTime.Now + ": " + s + "\n");
-        }
+        void WriteToLog(string s);
     }
 }
