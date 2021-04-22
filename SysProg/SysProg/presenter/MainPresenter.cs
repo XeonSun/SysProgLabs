@@ -106,7 +106,6 @@ namespace SysProg.presenter
             int index = 0;
             
             _view.GetRecourceIndex(ref index);
-            Console.WriteLine(index);
             if (index != -1 && index < _resRepository.Data.Count)
             {
                 _resourceView.Show();

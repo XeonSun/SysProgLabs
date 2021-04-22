@@ -28,7 +28,7 @@ namespace Logic.Model
         {
             Resource updated = Data[index];
             updated.Address = data.Address;
-            updated.Type = data.Address;
+            updated.Type = data.Type;
             updated.Date = data.Date;
             _resContext.SaveChanges();
         }

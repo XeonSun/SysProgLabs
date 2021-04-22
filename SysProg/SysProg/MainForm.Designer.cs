@@ -539,7 +539,6 @@ namespace SysProg
             this.rDataGridView.Location = new System.Drawing.Point(3, 3);
             this.rDataGridView.MultiSelect = false;
             this.rDataGridView.Name = "rDataGridView";
-            this.rDataGridView.ReadOnly = true;
             this.rDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.rDataGridView.Size = new System.Drawing.Size(761, 334);
             this.rDataGridView.TabIndex = 0;
