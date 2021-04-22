@@ -3,6 +3,11 @@ using Logic.contexts;
 using Logic.Model;
 using Logic.models;
 using System;
+using System.Windows.Forms;
+using System.IO;
+using System.Collections.Generic;
+using File = Logic.models.File;
+using System.Text;
 
 namespace SysProg.presenter
 {
@@ -32,6 +37,8 @@ namespace SysProg.presenter
             _view.AddFile += AddFile;
             _view.UpdateFile += UpdateFile;
             _view.DeleteFile += DeleteFile;
+            _view.ExportFiles += ExportFiles;
+            _view.ImportFiles += ImportFiles;
 
             _view.UpdateFiles(_fileRepository.Data);
         }
@@ -93,6 +100,62 @@ namespace SysProg.presenter
                 log.WriteToLog("Удаление записи " + index);
                 _fileRepository.Delete(index);
                 _view.UpdateFiles(_fileRepository.Data);
+            }
+        }
+
+        private void ExportFiles()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "csv files (*.csv)|*.csv";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = openFileDialog.FileName;
+                    List<File> files = new List<File>();
+                    _view.LoadFiles(files);
+                    using (var streamWriter = new StreamWriter(filePath, false))
+                    {
+                        foreach (var file in files)
+                        {
+                            var str = new StringBuilder();
+                            str.Append(file.Name).Append(',').Append(file.Version).Append(',').Append(file.Date).Append('\n');
+                            streamWriter.Write(str.ToString());
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        private void ImportFiles()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "csv files (*.csv)|*.csv";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = openFileDialog.FileName;
+                    List<File> files = new List<File>();
+                    using (var streamReader = new StreamReader(filePath))
+                    {
+                        while (!streamReader.EndOfStream)
+                        {
+                            string data = streamReader.ReadLine();
+                            var file = data.Split(',');
+                            files.Add(new File(file[0], file[1], DateTime.Parse(file[2])));
+                        }
+                    }
+                    _fileRepository.DeleteAll();
+                    _fileRepository.AddRange(files);
+                    _view.UpdateFiles(_fileRepository.Data);
+                    //log error // error toje nado dobavit// ya srat
+                }
             }
         }
 

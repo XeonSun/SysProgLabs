@@ -38,5 +38,17 @@ namespace Logic.Model
                 _fileContext.SaveChanges();
             }
         }
+
+        public void DeleteAll()
+        {
+            _fileContext.Files.RemoveRange(Data);
+            _fileContext.SaveChanges();
+        }
+
+        public void AddRange(IEnumerable<File> files)
+        {
+            _fileContext.Files.AddRange(files);
+            _fileContext.SaveChanges();
+        }
     }
 }
