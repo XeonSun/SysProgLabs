@@ -20,11 +20,18 @@ namespace SysProg
             checkForButton.Click += (sender, args) => Invoke(ForAnalysis);
             divCountButton.Click += (sender, args) => Invoke(DivCalculation);
             xorCountButton.Click += (sender, args) => Invoke(XorCalculation);
+
             addFButton.Click += (sender, args) => Invoke(AddFile);
             editFButton.Click += (sender, args) => Invoke(UpdateFile);
             deleteFButton.Click += (sender, args) => Invoke(DeleteFile);
             exportFButton.Click += (sender, args) => Invoke(ExportFiles);
             importFButton.Click += (sender, args) => Invoke(ImportFiles);
+
+            addRButton.Click += (sender, args) => Invoke(AddResource);
+            editRButton.Click += (sender, args) => Invoke(UpdateResource);
+            deleteRButton.Click += (sender, args) => Invoke(DeleteResource);
+            exportRButton.Click += (sender, args) => Invoke(ExportRes);
+            importRButton.Click += (sender, args) => Invoke(ImportRes);
         }
 
         private void Invoke(Action action)
@@ -49,6 +56,8 @@ namespace SysProg
         public event Action AddResource;
         public event Action UpdateResource;
         public event Action DeleteResource;
+        public event Action ExportRes;
+        public event Action ImportRes;
 
         public void LoadFiles(IList<File> files)
         {
@@ -124,6 +133,32 @@ namespace SysProg
         {
             TextBoxWriter writer = new TextBoxWriter(richTextBoxLogs);
             Console.SetOut(writer);
+        }
+
+        public void GetRecourceIndex(ref int index)
+        {
+            var selected = rDataGridView.SelectedRows;
+            if (selected.Count > 0)
+            {
+                index = rDataGridView.Rows.IndexOf(selected[0]);
+            }
+            else
+                index = -1;
+        }
+
+        public void LoadResources(IList<Resource> recources)
+        {
+            for (int i = 0; i < rDataGridView.Rows.Count - 1; i++)
+            {
+                recources.Add(new Resource((string)rDataGridView.Rows[i].Cells[0].Value, (string)rDataGridView.Rows[i].Cells[1].Value, DateTime.Parse(rDataGridView.Rows[i].Cells[2].Value.ToString())));
+            }
+        }
+
+        public void UpdateResources(IList<Resource> recources)
+        {
+            rDataGridView.Rows.Clear();
+            foreach (var res in recources)
+                rDataGridView.Rows.Add(res.Address, res.Type, res.Date);
         }
     }
 }

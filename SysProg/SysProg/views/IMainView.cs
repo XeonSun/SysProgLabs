@@ -15,12 +15,14 @@ namespace SysProg.views
         event Action UpdateFile;
         event Action DeleteFile;
 
-        //void LoadRecources(IList<File> recources);
-        //void UpdateRecources(IList<File> recources);
-        //void GetRecourceIndex(ref int index);
-        //event Action AddRecource;
-        //event Action UpdateRecource;
-        //event Action DeleteRecource;
+        void LoadResources(IList<Resource> recources);
+        void UpdateResources(IList<Resource> recources);
+        void GetRecourceIndex(ref int index);
+        event Action AddResource;
+        event Action UpdateResource;
+        event Action DeleteResource;
+        event Action ExportRes;
+        event Action ImportRes;
 
         void GetWhileStruct(ref string structure);
         void SetWhileResult(string result);

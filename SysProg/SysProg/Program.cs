@@ -13,8 +13,7 @@ namespace SysProg
     {
         public static readonly ApplicationContext context = new ApplicationContext();
         public static readonly FileRepository fileRepository = new FileRepository();
-        public static readonly ResContext resourceContext = new ResContext();
-
+        public static readonly ResRepository resRepository = new ResRepository();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -27,7 +26,7 @@ namespace SysProg
             ServiceContainer container = new ServiceContainer();
             container.RegisterInstance(context);
             container.RegisterInstance(fileRepository);
-            container.RegisterInstance(resourceContext);
+            container.RegisterInstance(resRepository);
             container.Register<IMainView, MainForm>();
             container.Register<IFillView<File>, FileInputForm>();
             container.Register<IFillView<Resource>, ResourceInputForm>();
