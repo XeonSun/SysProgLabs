@@ -74,6 +74,7 @@ namespace SysProg.presenter
 
         private void AddRes()
         {
+            _resourceView = new ResourceInputForm();
             _resourceView.Show();
             _resourceView.Submit += AddResToRep;
         }
@@ -85,8 +86,7 @@ namespace SysProg.presenter
             try
             {
                 _resRepository.Add(resource);
-            _resourceView.Close();
-            _resourceView = new ResourceInputForm();
+            _resourceView.Close();        
             _view.UpdateResources(_resRepository.Data);
                 log.WriteToLog("Добавление записи");
             }
@@ -102,6 +102,7 @@ namespace SysProg.presenter
             _view.GetFileIndex(ref index);
             if (index != -1 && index < _fileRepository.Data.Count)
             {
+                _fileView = new FileInputForm();
                 _fileView.Show();
                 _fileView.Submit += UpdateFileInRep;
                 _fileView.SetData(_fileRepository.Data[index]);
@@ -114,6 +115,7 @@ namespace SysProg.presenter
             _view.GetRecourceIndex(ref index);
             if (index != -1 && index < _resRepository.Data.Count)
             {
+                _resourceView = new ResourceInputForm();
                 _resourceView.Show();
                 _resourceView.Submit += UpdateResInRep;
                 _resourceView.SetData(_resRepository.Data[index]);
@@ -130,7 +132,6 @@ namespace SysProg.presenter
                 _view.GetFileIndex(ref index);
                 _fileRepository.Edit(index, file);
                 _fileView.Close();
-                _fileView = new FileInputForm();
                 _view.UpdateFiles(_fileRepository.Data);
             }
             catch(Exception ex)
@@ -151,7 +152,6 @@ namespace SysProg.presenter
             _view.GetRecourceIndex(ref index);
             _resRepository.Edit(index, res);
             _resourceView.Close();
-            _resourceView = new ResourceInputForm();
             _view.UpdateResources(_resRepository.Data);
             }
             catch (Exception ex)

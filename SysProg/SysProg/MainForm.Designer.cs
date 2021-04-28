@@ -67,9 +67,6 @@ namespace SysProg
             this.importFButton = new System.Windows.Forms.Button();
             this.exportFButton = new System.Windows.Forms.Button();
             this.fDataGridView = new System.Windows.Forms.DataGridView();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.deleteRButton = new System.Windows.Forms.Button();
             this.addRButton = new System.Windows.Forms.Button();
@@ -77,11 +74,14 @@ namespace SysProg
             this.importRButton = new System.Windows.Forms.Button();
             this.exportRButton = new System.Windows.Forms.Button();
             this.rDataGridView = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.richTextBoxLogs = new System.Windows.Forms.RichTextBox();
             this.ResourceAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResourceMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResourceDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.richTextBoxLogs = new System.Windows.Forms.RichTextBox();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FileDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -125,19 +125,19 @@ namespace SysProg
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.открытьToolStripMenuItem.Text = "Открыть";
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             // 
             // выйтиToolStripMenuItem
             // 
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.выйтиToolStripMenuItem.Text = "Выйти";
             // 
             // инфоToolStripMenuItem
@@ -449,24 +449,6 @@ namespace SysProg
             this.fDataGridView.Size = new System.Drawing.Size(761, 334);
             this.fDataGridView.TabIndex = 6;
             // 
-            // FileName
-            // 
-            this.FileName.HeaderText = "Название файла";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            // 
-            // FileVersion
-            // 
-            this.FileVersion.HeaderText = "Версия файла";
-            this.FileVersion.Name = "FileVersion";
-            this.FileVersion.ReadOnly = true;
-            // 
-            // FileDate
-            // 
-            this.FileDate.HeaderText = "Дата редактирования";
-            this.FileDate.Name = "FileDate";
-            this.FileDate.ReadOnly = true;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.deleteRButton);
@@ -543,24 +525,6 @@ namespace SysProg
             this.rDataGridView.Size = new System.Drawing.Size(761, 334);
             this.rDataGridView.TabIndex = 0;
             // 
-            // ResourceAddress
-            // 
-            this.ResourceAddress.HeaderText = "Адрес ресурса";
-            this.ResourceAddress.Name = "ResourceAddress";
-            this.ResourceAddress.ReadOnly = true;
-            // 
-            // ResourceMode
-            // 
-            this.ResourceMode.HeaderText = "Режим доступа";
-            this.ResourceMode.Name = "ResourceMode";
-            this.ResourceMode.ReadOnly = true;
-            // 
-            // ResourceDate
-            // 
-            this.ResourceDate.HeaderText = "Дата доступа";
-            this.ResourceDate.Name = "ResourceDate";
-            this.ResourceDate.ReadOnly = true;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -581,6 +545,48 @@ namespace SysProg
             this.richTextBoxLogs.Size = new System.Drawing.Size(767, 96);
             this.richTextBoxLogs.TabIndex = 3;
             this.richTextBoxLogs.Text = "";
+            // 
+            // ResourceAddress
+            // 
+            this.ResourceAddress.HeaderText = "Адрес ресурса";
+            this.ResourceAddress.Name = "ResourceAddress";
+            this.ResourceAddress.ReadOnly = true;
+            this.ResourceAddress.Width = 200;
+            // 
+            // ResourceMode
+            // 
+            this.ResourceMode.HeaderText = "Режим доступа";
+            this.ResourceMode.Name = "ResourceMode";
+            this.ResourceMode.ReadOnly = true;
+            this.ResourceMode.Width = 200;
+            // 
+            // ResourceDate
+            // 
+            this.ResourceDate.HeaderText = "Дата доступа";
+            this.ResourceDate.Name = "ResourceDate";
+            this.ResourceDate.ReadOnly = true;
+            this.ResourceDate.Width = 200;
+            // 
+            // FileName
+            // 
+            this.FileName.HeaderText = "Название файла";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 233;
+            // 
+            // FileVersion
+            // 
+            this.FileVersion.HeaderText = "Версия файла";
+            this.FileVersion.Name = "FileVersion";
+            this.FileVersion.ReadOnly = true;
+            this.FileVersion.Width = 233;
+            // 
+            // FileDate
+            // 
+            this.FileDate.HeaderText = "Дата редактирования";
+            this.FileDate.Name = "FileDate";
+            this.FileDate.ReadOnly = true;
+            this.FileDate.Width = 233;
             // 
             // MainForm
             // 
@@ -661,13 +667,13 @@ namespace SysProg
         private System.Windows.Forms.Button exportRButton;
         private System.Windows.Forms.DataGridView rDataGridView;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.RichTextBox richTextBoxLogs;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileVersion;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResourceDate;
-        private System.Windows.Forms.RichTextBox richTextBoxLogs;
     }
 }
 

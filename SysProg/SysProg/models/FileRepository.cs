@@ -38,6 +38,7 @@ namespace SysProg
                 {
                     _fileContext.Files.Add(new File(info.Name, System.Diagnostics.FileVersionInfo.GetVersionInfo(path).FileVersion, info.CreationTime));
                     _fileContext.SaveChanges();
+                    return;
                 }
             }
             throw new ArgumentException("Не корректное имя файла. Должен заканчиваться на .exe");
