@@ -8,6 +8,11 @@ namespace Logic.Model
 {
     public static class CsvWorker
     {
+        /// <summary>
+        /// Экспортировать записи о файлах в csv документ
+        /// </summary>
+        /// <param name="path">Путь до документа</param>
+        /// <param name="files">Записи для экспорта</param>
         public static void ExportFiles(string path, IEnumerable<models.File> files)
         {
             using (var streamWriter = new StreamWriter(path, false))
@@ -20,7 +25,11 @@ namespace Logic.Model
                 }
             }
         }
-
+        /// <summary>
+        /// Импортировать записи файлов из csv документа
+        /// </summary>
+        /// <param name="path">Путь до документа</param>
+        /// <param name="files">Список для заполнения записями из документа</param>
         public static void ImportFiles(string path, IList<models.File> files)
         {
             using (var streamReader = new StreamReader(path))
@@ -43,7 +52,11 @@ namespace Logic.Model
                 }
             }
         }
-
+        /// <summary>
+        /// Экспортировать записи о ресурсах в csv документ
+        /// </summary>
+        /// <param name="path">Путь до документа</param>
+        /// <param name="resources">Записи для экспорта</param>
         public static void ExportResources(string path, IEnumerable<Resource> resources)
         {
             using (var streamWriter = new StreamWriter(path, false))
@@ -56,7 +69,11 @@ namespace Logic.Model
                 }
             }
         }
-
+        /// <summary>
+        /// Импортировать записи о ресурсах из csv документа
+        /// </summary>
+        /// <param name="path">Путь до документа</param>
+        /// <param name="resources">Список для заполнения записями из документа</param>
         public static void ImportResources(string path, IList<Resource> resources)
         {
             using (var streamReader = new StreamReader(path))

@@ -542,6 +542,7 @@ namespace SysProg
             // 
             this.richTextBoxLogs.Location = new System.Drawing.Point(17, 432);
             this.richTextBoxLogs.Name = "richTextBoxLogs";
+            this.richTextBoxLogs.ReadOnly = true;
             this.richTextBoxLogs.Size = new System.Drawing.Size(767, 96);
             this.richTextBoxLogs.TabIndex = 3;
             this.richTextBoxLogs.Text = "";
