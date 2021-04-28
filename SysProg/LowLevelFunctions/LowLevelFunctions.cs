@@ -23,6 +23,7 @@ namespace LowLevelFunctions
 
         public static int LowLelelXor(int a,int b)
         {
+            Console.Write("Low Level Xor \n");
             Type[] OperationArgs = { typeof(int), typeof(int) };
             DynamicMethod xor = new DynamicMethod("Xor", typeof(int), OperationArgs);
             ILGenerator il = xor.GetILGenerator(256);
