@@ -1,11 +1,13 @@
 ﻿using Logic.contexts;
+using Logic.Model;
 using Logic.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SysProg
 {
-    public class ResRepository: IRepository<Resource>
+    public class ResRepository : IRepository<Resource>
     {
         private ResContext _resContext;
 
@@ -18,17 +20,32 @@ namespace SysProg
 
         public void Add(Resource data)
         {
-            
-            _resContext.Resources.Add(data);
-            _resContext.SaveChanges();
+            if (data.Type != null)
+            {
+                _resContext.Resources.Add(data);
+                _resContext.SaveChanges();
+            }
+            else
+                throw new ArgumentException("Не корректный тип доступа.'открытый' или 'закрытый')");
         }
-        public void Edit(int index,Resource data)
+
+        public void Add(string path)
         {
-            Resource updated = Data[index];
-            updated.Address = data.Address;
-            updated.Type = data.Type;
-            updated.Date = data.Date;
-            _resContext.SaveChanges();
+            throw new Exception("Не доступно.");
+        }
+
+        public void Edit(int index, Resource data)
+        {
+            if (data.Type != null)
+            {
+                Resource updated = Data[index];
+                updated.Address = data.Address;
+                updated.Type = data.Type;
+                updated.Date = data.Date;
+                _resContext.SaveChanges();
+            }
+            else
+                throw new ArgumentException("Не корректный тип доступа.'открытый' или 'закрытый')");
         }
 
         public void Delete(int index)
@@ -40,14 +57,30 @@ namespace SysProg
             }
         }
 
+        private void DeleteAll()
+        {
+            _resContext.Resources.RemoveRange(Data);
+            _resContext.SaveChanges();
+        }
+
+        public void AddRange(IEnumerable<Resource> resources)
+        {
+            _resContext.Resources.AddRange(resources);
+            _resContext.SaveChanges();
+        }
+
         public void Import(string path)
         {
-
+            DeleteAll();
+            List<Resource> resources = new List<Resource>();
+            CsvWorker.ImportResources(path, resources);
+            _resContext.Resources.AddRange(resources);
+            _resContext.SaveChanges();
         }
 
         public void Export(string path)
         {
-
+            CsvWorker.ExportResources(path, Data);
         }
     }
 }

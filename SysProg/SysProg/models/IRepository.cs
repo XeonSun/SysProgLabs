@@ -12,6 +12,7 @@ namespace SysProg
         IList<T> Data { get; }
 
         void Add(T data);
+        void Add(string path);
         void Edit(int index, T data);
         void Delete(int index);
         void Import(string path);

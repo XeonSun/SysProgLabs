@@ -29,6 +29,20 @@ namespace SysProg
                 throw new ArgumentException("Не корректное имя файла. Должен заканчиваться на .exe");
         }
 
+        public void Add(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                var info = new System.IO.FileInfo(path);
+                if (info.Extension != "exe")
+                {
+                    _fileContext.Files.Add(new File(info.Name, System.Diagnostics.FileVersionInfo.GetVersionInfo(path).FileVersion, info.CreationTime));
+                    _fileContext.SaveChanges();
+                }
+            }
+            throw new ArgumentException("Не корректное имя файла. Должен заканчиваться на .exe");
+        }
+
         public void Edit(int index, File data)
         {
             if (data.Name != null)

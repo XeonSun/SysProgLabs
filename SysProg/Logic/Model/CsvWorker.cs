@@ -31,7 +31,46 @@ namespace Logic.Model
                     {
                         string data = streamReader.ReadLine();
                         var file = data.Split(',');
-                        files.Add(new models.File(file[0], file[1], DateTime.Parse(file[2])));
+                        if (file[0].EndsWith(".exe"))
+                            files.Add(new models.File(file[0], file[1], DateTime.Parse(file[2])));
+                        else
+                            throw new ArgumentException("Не правильное имя файла");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException();
+                }
+            }
+        }
+
+        public static void ExportResources(string path, IEnumerable<Resource> resources)
+        {
+            using (var streamWriter = new StreamWriter(path, false))
+            {
+                foreach (var resource in resources)
+                {
+                    var str = new StringBuilder();
+                    str.Append(resource.Address).Append(',').Append(resource.Type).Append(',').Append(resource.Date).Append('\n');
+                    streamWriter.Write(str.ToString());
+                }
+            }
+        }
+
+        public static void ImportResources(string path, IList<Resource> resources)
+        {
+            using (var streamReader = new StreamReader(path))
+            {
+                try
+                {
+                    while (!streamReader.EndOfStream)
+                    {
+                        string data = streamReader.ReadLine();
+                        var file = data.Split(',');
+                        if (file[1].ToUpper() == "ЗАКРЫТЫЙ" || file[1].ToUpper() == "ОТКРЫТЫЙ")
+                            resources.Add(new Resource(file[0], file[1], DateTime.Parse(file[2])));
+                        else
+                            throw new ArgumentException("Не правильный тип доступа.");
                     }
                 }
                 catch (Exception)

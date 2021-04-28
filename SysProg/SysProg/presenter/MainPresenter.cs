@@ -4,6 +4,7 @@ using Logic.models;
 using SysProg.views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using File = Logic.models.File;
 
@@ -19,7 +20,6 @@ namespace SysProg.presenter
         private IRepository<Resource> _resRepository;
         private ILowLevelModel _lowLevelModel;
         private IStructureAnalysisModel _analysisModel;
-        private ResContext _resContext;
         private ILogWriter log = new LogWriter();
 
         public MainPresenter(IMainView view, Controller controller, IRepository<File> fileRepository, IRepository<Resource> resRepository, IFillView<File> fileView, IFillView<Resource> resourceView, IStructureAnalysisModel analysisModel, ILowLevelModel lowLevelModel)
@@ -47,6 +47,8 @@ namespace SysProg.presenter
             _view.DeleteResource += DeleteRes;
             _view.ExportFiles += ExportFiles;
             _view.ImportFiles += ImportFiles;
+            _view.ExportRes += ExportResources;
+            _view.ImportRes += ImportResources;
 
             _view.UpdateFiles(_fileRepository.Data);
             _view.UpdateResources(_resRepository.Data);
@@ -54,8 +56,20 @@ namespace SysProg.presenter
 
         private void AddFile()
         {
-            _fileView.Show();
-            _fileView.Submit += AddFileToRep;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "exe files (*.exe)|*.exe";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+                
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _fileRepository.Add(openFileDialog.FileName);
+                    log.WriteToLog($@"Добавление записи о файле {openFileDialog.FileName}");
+                }
+
+            }
         }
 
         private void AddRes()
@@ -64,32 +78,22 @@ namespace SysProg.presenter
             _resourceView.Submit += AddResToRep;
         }
 
-        private void AddFileToRep()
-        {
-            File file = new File();
-            _fileView.GetData(file);
-            try
-            {
-                _fileRepository.Add(file);
-                _fileView.Close();
-                _fileView = new FileInputForm();
-                _view.UpdateFiles(_fileRepository.Data);
-                log.WriteToLog("Добавление записи");
-            } catch(Exception ex)
-            {
-                _fileView.SetError(ex.Message);
-            }
-        }
-
         private void AddResToRep()
         {
             Resource resource = new Resource();
             _resourceView.GetData(resource);
-            _resRepository.Add(resource);
+            try
+            {
+                _resRepository.Add(resource);
             _resourceView.Close();
             _resourceView = new ResourceInputForm();
             _view.UpdateResources(_resRepository.Data);
-            log.WriteToLog("Добавление записи");
+                log.WriteToLog("Добавление записи");
+            }
+            catch (Exception ex)
+            {
+                _fileView.SetError(ex.Message);
+            }
         }
 
         private void UpdateFile()
@@ -107,7 +111,6 @@ namespace SysProg.presenter
         private void UpdateResourses()
         {
             int index = 0;
-            
             _view.GetRecourceIndex(ref index);
             if (index != -1 && index < _resRepository.Data.Count)
             {
@@ -141,13 +144,20 @@ namespace SysProg.presenter
         {
             Resource res = new Resource();
             _resourceView.GetData(res);
-            int index = 0;
+            try
+            {
+                int index = 0;
             log.WriteToLog("Обновление записи " + index);
             _view.GetRecourceIndex(ref index);
             _resRepository.Edit(index, res);
             _resourceView.Close();
             _resourceView = new ResourceInputForm();
             _view.UpdateResources(_resRepository.Data);
+            }
+            catch (Exception ex)
+            {
+                _fileView.SetError(ex.Message);
+            }
         }
 
 
@@ -169,12 +179,13 @@ namespace SysProg.presenter
         {
             int index = 0;
             _view.GetRecourceIndex(ref index);
-            if (index != -1)
+            try
             {
                 log.WriteToLog("Удаление записи " + index);
                 _resRepository.Delete(index);
                 _view.UpdateResources(_resRepository.Data);
             }
+            catch { }
         }
 
         private void ExportFiles()
@@ -210,11 +221,60 @@ namespace SysProg.presenter
                         List<File> files = new List<File>();
                         _fileRepository.Import(openFileDialog.FileName);
                         _view.UpdateFiles(_fileRepository.Data);
+                        log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
                     } catch
                     {
                         log.WriteToLog("Не корректное содержимое файла");
                     }
-                    log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
+                }
+            }
+        }
+
+        private void ExportResources()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "csv files (*.csv)|*.csv";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+                openFileDialog.CheckFileExists = false;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        _resRepository.Export(openFileDialog.FileName);
+                        log.WriteToLog($@"Успешный экспорт {openFileDialog.FileName}");
+                    }
+                    catch
+                    {
+                        log.WriteToLog("Не корректное содержимое файла");
+                    }
+                }
+            }
+        }
+
+        public void ImportResources()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "csv files (*.csv)|*.csv";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        List<Resource> resources = new List<Resource>();
+                        _resRepository.Import(openFileDialog.FileName);
+                        _view.UpdateResources(_resRepository.Data);
+                        log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
+                    }
+                    catch
+                    {
+                        log.WriteToLog("Не корректное содержимое файла");
+                    }
                 }
             }
         }
