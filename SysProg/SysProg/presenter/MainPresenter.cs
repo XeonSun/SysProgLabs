@@ -307,7 +307,7 @@ namespace SysProg.presenter
             _view.GetDivParams(ref a, ref b);
             string result = _lowLevelModel.Div(a, b);
             _view.SetDivResult(result);
-            log.WriteToLog(result);
+            log.WriteToLog("Результат: "+result);
         }
 
         private void XorCalculate()
@@ -317,7 +317,7 @@ namespace SysProg.presenter
             _view.GetXorParams(ref a, ref b);
             string result = _lowLevelModel.Xor(a, b);
             _view.SetXorResult(result);
-            log.WriteToLog(result);
+            log.WriteToLog("Результат: " + result);
         }
 
         public void Run()
