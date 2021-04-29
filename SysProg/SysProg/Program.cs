@@ -1,5 +1,6 @@
 ﻿using LightInject;
 using Logic.models;
+using SysProg.models;
 using SysProg.presenter;
 using SysProg.views;
 using System;
@@ -22,10 +23,7 @@ namespace SysProg
 
             ServiceContainer container = new ServiceContainer();
             container.RegisterInstance(context);
-            container.Register<IStructureAnalysisModel, StuctureAnalysisModel>();
-            container.Register<ILowLevelModel, LowLevelModel>();
-            container.Register<IRepository<File>, FileRepository>();
-            container.Register<IRepository<Resource>, ResRepository>();
+            container.Register<IMainModel, MainModel>();
             container.Register<IMainView, MainForm>();
             container.Register<IFillView<File>, FileInputForm>();
             container.Register<IFillView<Resource>, ResourceInputForm>();

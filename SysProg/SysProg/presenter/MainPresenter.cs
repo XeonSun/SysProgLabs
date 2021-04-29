@@ -1,10 +1,7 @@
-﻿using Logic.contexts;
-using Logic.Model;
-using Logic.models;
+﻿using Logic.models;
 using SysProg.views;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Forms;
 using File = Logic.models.File;
 
@@ -16,22 +13,16 @@ namespace SysProg.presenter
         private IFillView<File> _fileView;
         private IFillView<Resource> _resourceView;
         private Controller _controller;
-        private IRepository<File> _fileRepository;
-        private IRepository<Resource> _resRepository;
-        private ILowLevelModel _lowLevelModel;
-        private IStructureAnalysisModel _analysisModel;
+        private IMainModel _model;
         private ILogWriter log = new LogWriter();
 
-        public MainPresenter(IMainView view, Controller controller, IRepository<File> fileRepository, IRepository<Resource> resRepository, IFillView<File> fileView, IFillView<Resource> resourceView, IStructureAnalysisModel analysisModel, ILowLevelModel lowLevelModel)
+        public MainPresenter(IMainView view, Controller controller, IFillView<File> fileView, IFillView<Resource> resourceView, IMainModel model)
         {
             _view = view;
             _controller = controller;
-            _fileRepository = fileRepository;
+            _model = model;
             _fileView = fileView;
-            _lowLevelModel = lowLevelModel;
-            _analysisModel = analysisModel;
             _resourceView = resourceView;
-            _resRepository = resRepository;
 
 
             _view.WhileAnalysis += WhileAnalysis;
@@ -50,8 +41,8 @@ namespace SysProg.presenter
             _view.ExportRes += ExportResources;
             _view.ImportRes += ImportResources;
 
-            _view.UpdateFiles(_fileRepository.Data);
-            _view.UpdateResources(_resRepository.Data);
+            _view.UpdateFiles(_model.Files);
+            _view.UpdateResources(_model.Resources);
         }
 
         private void AddFile()
@@ -65,7 +56,8 @@ namespace SysProg.presenter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    _fileRepository.Add(openFileDialog.FileName);
+                    _model.AddFile(openFileDialog.FileName);
+                    _view.UpdateFiles(_model.Files);
                     log.WriteToLog($@"Добавление записи о файле {openFileDialog.FileName}");
                 }
 
@@ -85,9 +77,9 @@ namespace SysProg.presenter
             _resourceView.GetData(resource);
             try
             {
-                _resRepository.Add(resource);
+                _model.AddResource(resource);
             _resourceView.Close();        
-            _view.UpdateResources(_resRepository.Data);
+            _view.UpdateResources(_model.Resources);
                 log.WriteToLog("Добавление записи");
             }
             catch (Exception ex)
@@ -100,12 +92,12 @@ namespace SysProg.presenter
         {
             int index = 0;
             _view.GetFileIndex(ref index);
-            if (index != -1 && index < _fileRepository.Data.Count)
+            if (index != -1 && index < _model.Files.Count)
             {
                 _fileView = new FileInputForm();
                 _fileView.Show();
                 _fileView.Submit += UpdateFileInRep;
-                _fileView.SetData(_fileRepository.Data[index]);
+                _fileView.SetData(_model.Files[index]);
             }
         }
 
@@ -113,12 +105,12 @@ namespace SysProg.presenter
         {
             int index = 0;
             _view.GetRecourceIndex(ref index);
-            if (index != -1 && index < _resRepository.Data.Count)
+            if (index != -1 && index < _model.Resources.Count)
             {
                 _resourceView = new ResourceInputForm();
                 _resourceView.Show();
                 _resourceView.Submit += UpdateResInRep;
-                _resourceView.SetData(_resRepository.Data[index]);
+                _resourceView.SetData(_model.Resources[index]);
             }
         }
 
@@ -130,9 +122,9 @@ namespace SysProg.presenter
                 int index = 0;
                 log.WriteToLog("Обновление записи " + index);
                 _view.GetFileIndex(ref index);
-                _fileRepository.Edit(index, file);
+                _model.EditFile(index, file);
                 _fileView.Close();
-                _view.UpdateFiles(_fileRepository.Data);
+                _view.UpdateFiles(_model.Files);
             }
             catch(Exception ex)
             {
@@ -150,9 +142,9 @@ namespace SysProg.presenter
                 int index = 0;
             log.WriteToLog("Обновление записи " + index);
             _view.GetRecourceIndex(ref index);
-            _resRepository.Edit(index, res);
+            _model.EditResource(index, res);
             _resourceView.Close();
-            _view.UpdateResources(_resRepository.Data);
+            _view.UpdateResources(_model.Resources);
             }
             catch (Exception ex)
             {
@@ -169,8 +161,8 @@ namespace SysProg.presenter
             try
             {
                 log.WriteToLog("Удаление записи " + index);
-                _fileRepository.Delete(index);
-                _view.UpdateFiles(_fileRepository.Data);
+                _model.DeleteFile(index);
+                _view.UpdateFiles(_model.Files);
             }
             catch { }
         }
@@ -182,8 +174,8 @@ namespace SysProg.presenter
             try
             {
                 log.WriteToLog("Удаление записи " + index);
-                _resRepository.Delete(index);
-                _view.UpdateResources(_resRepository.Data);
+                _model.DeleteResource(index);
+                _view.UpdateResources(_model.Resources);
             }
             catch { }
         }
@@ -199,7 +191,7 @@ namespace SysProg.presenter
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    _fileRepository.Export(openFileDialog.FileName);
+                    _model.ExportFiles(openFileDialog.FileName);
                     log.WriteToLog($@"Успешный экспорт {openFileDialog.FileName}");
                 }
 
@@ -219,8 +211,8 @@ namespace SysProg.presenter
                     try
                     {
                         List<File> files = new List<File>();
-                        _fileRepository.Import(openFileDialog.FileName);
-                        _view.UpdateFiles(_fileRepository.Data);
+                        _model.ImportFiles(openFileDialog.FileName);
+                        _view.UpdateFiles(_model.Files);
                         log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
                     } catch
                     {
@@ -243,7 +235,7 @@ namespace SysProg.presenter
                 {
                     try
                     {
-                        _resRepository.Export(openFileDialog.FileName);
+                        _model.ExportResources(openFileDialog.FileName);
                         log.WriteToLog($@"Успешный экспорт {openFileDialog.FileName}");
                     }
                     catch
@@ -267,8 +259,8 @@ namespace SysProg.presenter
                     try
                     {
                         List<Resource> resources = new List<Resource>();
-                        _resRepository.Import(openFileDialog.FileName);
-                        _view.UpdateResources(_resRepository.Data);
+                        _model.ImportResources(openFileDialog.FileName);
+                        _view.UpdateResources(_model.Resources);
                         log.WriteToLog($@"Успешный импорт {openFileDialog.FileName}");
                     }
                     catch
@@ -285,7 +277,7 @@ namespace SysProg.presenter
             log.WriteToLog("Анализ конструкции языка While");
             string structure = "";
             _view.GetWhileStruct(ref structure);
-            string result = _analysisModel.AnalysisWhile(structure);
+            string result = _model.AnalysisWhile(structure);
             log.WriteToLog(result);
             _view.SetWhileResult(result);
         }
@@ -295,7 +287,7 @@ namespace SysProg.presenter
             log.WriteToLog("Анализ конструкции языка For");
             string structure = "";
             _view.GetForStruct(ref structure);
-            string result = _analysisModel.AnalysisFor(structure);
+            string result = _model.AnalysisFor(structure);
             log.WriteToLog(result);
             _view.SetForResult(result);
         }
@@ -305,7 +297,7 @@ namespace SysProg.presenter
             log.WriteToLog("Вычисление низкоуровневой функции деления");
             string a = "", b = "";
             _view.GetDivParams(ref a, ref b);
-            string result = _lowLevelModel.Div(a, b);
+            string result = _model.Div(a, b);
             _view.SetDivResult(result);
             log.WriteToLog("Результат: "+result);
         }
@@ -315,7 +307,7 @@ namespace SysProg.presenter
             log.WriteToLog("Вычисление низкоуровневой функции XOR");
             string a = "", b = "";
             _view.GetXorParams(ref a, ref b);
-            string result = _lowLevelModel.Xor(a, b);
+            string result = _model.Xor(a, b);
             _view.SetXorResult(result);
             log.WriteToLog("Результат: " + result);
         }
