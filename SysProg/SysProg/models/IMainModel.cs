@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SysProg
 {
-    public interface IMainModel : IStructureAnalysisModel, ILowLevelModel
+    public interface IMainModel
     {
         IList<File> Files { get; }
         IList<Resource> Resources { get; }
@@ -25,5 +25,9 @@ namespace SysProg
         void ImportResources(string path);
         void ExportResources(string path);
 
+        string AnalysisFor(string structure);
+        string AnalysisWhile(string structure);
+        string Xor(string a, string b);
+        string Div(string a, string b);
     }
 }
